@@ -1,0 +1,62 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-recommended-vue", "stylelint-config-recess-order"],
+  "customSyntax": "postcss-html",
+  "plugins": ["stylelint-scss", "stylelint-order"],
+  "rules": {
+    "max-nesting-depth": 3,
+    "selector-max-id": 0,
+    "selector-no-qualifying-type": true,
+    "no-descending-specificity": null,
+
+    "scss/load-partial-extension": "always",
+    "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "scss/at-mixin-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "scss/at-function-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "scss/percent-placeholder-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "scss/no-global-function-names": null,
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["tailwind", "apply", "layer"]
+      }
+    ],
+
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["deep", "global", "slotted"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["v-deep", "v-global", "v-slotted"]
+      }
+    ],
+    "function-no-unknown": [
+      true,
+      {
+        "ignoreFunctions": ["v-bind"]
+      }
+    ],
+
+    "order/properties-order": [],
+    "order/properties-alphabetical-order": true,
+
+    "color-named": "never",
+    "declaration-property-unit-disallowed-list": {
+      "line-height": ["px"],
+      "font-size": ["px"],
+      "/^animation/": ["ms"]
+    },
+    "scss/operator-no-unspaced": true,
+    "scss/double-slash-comment-whitespace-inside": "always",
+    "scss/declaration-nested-properties": "never"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
+    }
+  ]
+}
