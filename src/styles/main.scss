@@ -1,2 +1,2 @@
-@import 'normalize-scss/sass/normalize.scss';
+@use 'normalize-scss/sass/normalize.scss' as *;
 @include normalize;
