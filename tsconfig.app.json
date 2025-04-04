@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "preserve",
+    "module": "ESNext",
+    "outDir": "./dist-app",
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"]
+}

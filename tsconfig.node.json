@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist-node",
+    "rootDir": "."
+  },
+  "include": ["vite.config.ts", "*.config.ts", "eslint.config.js"]
+}
