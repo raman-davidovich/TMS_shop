@@ -101,11 +101,6 @@
 
       &-item {
         padding: 0;
-
-        &:hover {
-          background: rgba(colors.$accentElementColor, 0.1);
-          border-radius: 8px;
-        }
       }
     }
   }
