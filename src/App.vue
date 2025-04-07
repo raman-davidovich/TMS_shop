@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import GlobalFooter from './components/GlobalFooter.vue'
+</script>
 
 <template>
-  <div>Test</div>
+  <GlobalFooter />
 </template>
 
 <style scoped lang="scss">
