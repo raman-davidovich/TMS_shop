@@ -1,14 +1,20 @@
 <script setup lang="ts">
   import { ref } from 'vue'
+  import { APP_NAVIGATION_COLOR_TYPE, APP_NAVIGATION_ITEM } from './AppNavigation.types'
 
-  const props = defineProps({
-    colorType: {
-      type: String,
-      required: true
-    }
-  })
+  defineProps<{
+    colorType: APP_NAVIGATION_COLOR_TYPE
+  }>()
 
-  const menuItems: string[] = ['Home', 'Shop', 'Account', 'Pages', 'Blog', 'Docs/Components']
+  const menuItems: APP_NAVIGATION_ITEM[] = [
+    APP_NAVIGATION_ITEM.HOME,
+    APP_NAVIGATION_ITEM.SHOP,
+    APP_NAVIGATION_ITEM.ACCOUNT,
+    APP_NAVIGATION_ITEM.PAGES,
+    APP_NAVIGATION_ITEM.BLOG,
+    APP_NAVIGATION_ITEM.DOCS
+  ]
+
   const hoverIndex = ref<number | null>(null)
 </script>
 
@@ -19,7 +25,7 @@
         v-for="(item, index) in menuItems"
         :key="index"
         class="menu-item"
-        :class="[`menu-item--${props.colorType}`]"
+        :class="[`menu-item--${colorType}`]"
         @mouseenter="hoverIndex = index"
         @mouseleave="hoverIndex = null"
       >
