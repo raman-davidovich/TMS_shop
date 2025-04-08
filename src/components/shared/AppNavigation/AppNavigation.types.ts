@@ -1,6 +1,6 @@
 export enum APP_NAVIGATION_COLOR_TYPE {
-  SECONDARY = 'secondary',
-  ADDITIONAL = 'addional'
+  PRIMARY = 'primary',
+  ADDITIONAL = 'additional'
 }
 
 export enum APP_NAVIGATION_ITEM {
