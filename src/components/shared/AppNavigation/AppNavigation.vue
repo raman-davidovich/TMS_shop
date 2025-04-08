@@ -16,10 +16,15 @@
 </script>
 
 <template>
-  <nav>
-    <ul class="menu">
-      <li v-for="(item, index) in menuItems" :key="index" class="menu-item" :class="[`menu-item--${colorType}`]">
-        <span class="link-content">
+  <nav class="app-navigation">
+    <ul class="app-navigation__list">
+      <li
+        v-for="(item, index) in menuItems"
+        :key="index"
+        class="app-navigation__item"
+        :class="[`app-navigation__item_${colorType}`]"
+      >
+        <span class="app-navigation__link">
           {{ item }}
         </span>
       </li>
@@ -30,11 +35,13 @@
 <style scoped lang="scss">
   @use '../../../styles/colors.scss' as colors;
 
-  .menu {
-    display: flex;
-    gap: 21px;
+  .app-navigation {
+    &__list {
+      display: flex;
+      gap: 21px;
+    }
 
-    &-item {
+    &__item {
       cursor: pointer;
       font-size: 1em;
       font-weight: 600;
@@ -64,29 +71,33 @@
         }
       }
 
-      &--primary {
+      &_primary {
         color: colors.$primaryFontColor;
       }
 
-      &--additional {
+      &_additional {
         color: colors.$additionalFontColor;
       }
-
-      .link-content {
-        display: block;
-        position: relative;
-      }
     }
-  }
 
-  @media (width <= 700px) {
-    .menu {
-      align-items: center;
-      flex-direction: column;
-      gap: 16px;
+    &__link {
+      display: block;
+      position: relative;
+    }
 
-      &-item {
+    @media (width <= 700px) {
+      &__list {
+        align-items: center;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      &__item {
         padding: 0;
+
+        &::after {
+          bottom: -5px;
+        }
       }
     }
   }
