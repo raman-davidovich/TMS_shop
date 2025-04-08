@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
   import { APP_NAVIGATION_COLOR_TYPE, APP_NAVIGATION_ITEM } from './AppNavigation.types'
 
   defineProps<{
@@ -14,24 +13,14 @@
     APP_NAVIGATION_ITEM.BLOG,
     APP_NAVIGATION_ITEM.DOCS
   ]
-
-  const hoverIndex = ref<number | null>(null)
 </script>
 
 <template>
   <nav>
     <ul class="menu">
-      <li
-        v-for="(item, index) in menuItems"
-        :key="index"
-        class="menu-item"
-        :class="[`menu-item--${colorType}`]"
-        @mouseenter="hoverIndex = index"
-        @mouseleave="hoverIndex = null"
-      >
+      <li v-for="(item, index) in menuItems" :key="index" class="menu-item" :class="[`menu-item--${colorType}`]">
         <span class="link-content">
           {{ item }}
-          <span class="underline" :class="{ 'underline-active': hoverIndex === index }" />
         </span>
       </li>
     </ul>
@@ -39,7 +28,7 @@
 </template>
 
 <style scoped lang="scss">
-  @use '../../styles/colors.scss' as colors;
+  @use '../../../styles/colors.scss' as colors;
 
   .menu {
     display: flex;
@@ -56,45 +45,36 @@
       position: relative;
       transition: color 0.3s ease;
 
+      &::after {
+        background-color: colors.$accentElementColor;
+        bottom: 0;
+        content: '';
+        height: 2px;
+        left: 0;
+        position: absolute;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 0;
+      }
+
+      &:hover {
+        color: colors.$accentElementColor;
+
+        &::after {
+          width: 100%;
+        }
+      }
+
       &--primary {
         color: colors.$primaryFontColor;
       }
 
-      &--secondary {
-        color: colors.$secondaryFontColor;
-      }
-
-      &--tertiary {
-        color: colors.$tertiaryFontColor;
-      }
-
-      &--active {
-        color: colors.$accentElementColor;
+      &--additional {
+        color: colors.$additionalFontColor;
       }
 
       .link-content {
         display: block;
         position: relative;
-      }
-
-      .underline {
-        background: colors.$accentElementColor;
-        bottom: -5px;
-        height: 2px;
-        left: 0;
-        position: absolute;
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        width: 100%;
-
-        &-active {
-          transform: scaleX(1);
-        }
-      }
-
-      &:hover {
-        color: colors.$accentElementColor;
       }
     }
   }
@@ -107,11 +87,6 @@
 
       &-item {
         padding: 0;
-
-        &:hover {
-          background: rgba(colors.$accentElementColor, 0.1);
-          border-radius: 8px;
-        }
       }
     }
   }
