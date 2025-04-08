@@ -33,7 +33,8 @@
 </template>
 
 <style scoped lang="scss">
-  @use '../../../styles/colors.scss' as colors;
+  @use '@styles/colors.scss' as colors;
+  @use '@styles/spacing.scss' as spacing;
 
   .app-navigation {
     &__list {
@@ -85,7 +86,7 @@
       position: relative;
     }
 
-    @media (width <= 700px) {
+    @include spacing.tablet {
       &__list {
         align-items: center;
         flex-direction: column;
