@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import GlobalFooter from './components/GlobalFooter.vue'
+  import AppFooter from './components/AppFooter.vue'
 </script>
 
 <template>
-  <GlobalFooter />
+  <AppFooter />
 </template>
 
 <style scoped lang="scss">
