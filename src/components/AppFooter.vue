@@ -4,9 +4,9 @@
 </script>
 
 <template>
-  <div class="app-footer">
+  <footer class="app-footer">
     <AppNavigation :colorType="APP_NAVIGATION_COLOR_TYPE.ADDITIONAL" />
-  </div>
+  </footer>
 </template>
 
 <style scooped lang="scss">
