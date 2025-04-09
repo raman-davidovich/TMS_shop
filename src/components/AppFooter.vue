@@ -9,7 +9,7 @@
   </footer>
 </template>
 
-<style scooped lang="scss">
+<style scoped lang="scss">
   @use '@styles/colors.scss' as colors;
   @use '@styles/spacing.scss' as spacing;
 
