@@ -11,8 +11,8 @@
   <nav class="app-navigation">
     <ul class="app-navigation__list">
       <li
-        v-for="(item, index) in MENU_ITEMS"
-        :key="index"
+        v-for="item in MENU_ITEMS"
+        :key="item"
         class="app-navigation__item"
         :class="[`app-navigation__item_${colorType}`]"
       >
