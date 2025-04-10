@@ -13,7 +13,8 @@ export default defineConfig([
   { files: ['**/*.vue'], languageOptions: { parserOptions: { parser: tseslint.parser } } },
   {
     rules: {
-      'no-unused-vars': 'warn',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['warn'],
       'no-undef': 'warn',
       'prefer-const': [
         'error',
