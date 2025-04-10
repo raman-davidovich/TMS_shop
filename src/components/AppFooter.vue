@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import AppNavigation from './shared/AppNavigation/AppNavigation.vue'
-  import { APP_NAVIGATION_COLOR_TYPE } from './shared/AppNavigation/AppNavigation.types'
+  import AppNavigation from './shared/app-navigation/AppNavigation.vue'
+  import { APP_NAVIGATION_COLOR_TYPES } from './shared/app-navigation//AppNavigation.types'
 </script>
 
 <template>
   <footer class="app-footer">
-    <AppNavigation :colorType="APP_NAVIGATION_COLOR_TYPE.ADDITIONAL" />
+    <AppNavigation :colorType="APP_NAVIGATION_COLOR_TYPES.ADDITIONAL" />
   </footer>
 </template>
 
