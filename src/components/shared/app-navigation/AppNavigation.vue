@@ -1,25 +1,17 @@
 <script setup lang="ts">
-  import { APP_NAVIGATION_COLOR_TYPE, APP_NAVIGATION_ITEM } from './AppNavigation.types'
+  import { AppNavigationColorType } from './AppNavigation.types'
+  import { MENU_ITEMS } from './AppNavigation.constants'
 
   defineProps<{
-    colorType: APP_NAVIGATION_COLOR_TYPE
+    colorType: AppNavigationColorType
   }>()
-
-  const menuItems: APP_NAVIGATION_ITEM[] = [
-    APP_NAVIGATION_ITEM.HOME,
-    APP_NAVIGATION_ITEM.SHOP,
-    APP_NAVIGATION_ITEM.ACCOUNT,
-    APP_NAVIGATION_ITEM.PAGES,
-    APP_NAVIGATION_ITEM.BLOG,
-    APP_NAVIGATION_ITEM.DOCS
-  ]
 </script>
 
 <template>
   <nav class="app-navigation">
     <ul class="app-navigation__list">
       <li
-        v-for="(item, index) in menuItems"
+        v-for="(item, index) in MENU_ITEMS"
         :key="index"
         class="app-navigation__item"
         :class="[`app-navigation__item_${colorType}`]"
