@@ -7,6 +7,7 @@
     "selector-max-id": 0,
     "selector-no-qualifying-type": true,
     "no-descending-specificity": null,
+    "at-rule-no-unknown": null,
 
     "scss/load-partial-extension": "always",
     "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
