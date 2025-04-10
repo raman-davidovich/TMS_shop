@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import { AppNavigationColorType } from './AppNavigation.types'
+  import { APP_NAVIGATION_COLOR_TYPES } from './AppNavigation.types'
   import { MENU_ITEMS } from './AppNavigation.constants'
 
   defineProps<{
-    colorType: AppNavigationColorType
+    colorType: APP_NAVIGATION_COLOR_TYPES
   }>()
 </script>
 

@@ -1,4 +1,13 @@
-import { APP_NAVIGATION_COLOR_TYPES, APP_NAVIGATION_ITEMS } from './AppNavigation.constants'
+export enum APP_NAVIGATION_ITEMS {
+  HOME = 'Home',
+  SHOP = 'Shop',
+  ACCOUNT = 'Account',
+  PAGES = 'Pages',
+  BLOG = 'Blog',
+  DOCS = 'Docs/Components'
+}
 
-export type AppNavigationItemType = (typeof APP_NAVIGATION_ITEMS)[keyof typeof APP_NAVIGATION_ITEMS]
-export type AppNavigationColorType = (typeof APP_NAVIGATION_COLOR_TYPES)[keyof typeof APP_NAVIGATION_COLOR_TYPES]
+export enum APP_NAVIGATION_COLOR_TYPES {
+  PRIMARY = 'primary',
+  ADDITIONAL = 'additional'
+}
