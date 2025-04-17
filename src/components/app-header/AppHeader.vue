@@ -60,7 +60,7 @@
     <button class="app-header__burger-menu" @click.stop="isMenuOpen = !isMenuOpen" v-show="isMobile">
       <BurgerMenuIcon class="app-header__action-icon" />
     </button>
-    <div class="app-header__menu" :class="{ 'app-header__menu_active': isMenuOpen }" v-show="!isMobile || isMenuOpen" z>
+    <div class="app-header__menu" :class="{ 'app-header__menu_active': isMenuOpen }" v-show="!isMobile || isMenuOpen">
       <AppNavigation
         :color-type="APP_NAVIGATION_COLOR_TYPES.TERTIARY"
         isShort
