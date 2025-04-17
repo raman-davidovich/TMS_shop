@@ -2,7 +2,7 @@
   import { ref, onMounted, onBeforeUnmount, watch, type Ref } from 'vue'
   import AppNavigation from '../shared/app-navigation/AppNavigation.vue'
   import { APP_NAVIGATION_COLOR_TYPES } from '../shared/app-navigation/AppNavigation.types'
-  import FavouriteIcon from './FavouriteIcon.vue'
+  import FavoriteIcon from './FavoriteIcon.vue'
   import CartIcon from './CartIcon.vue'
   import AccountIcon from './AccountIcon.vue'
   import BurgerMenuIcon from './BurgerMenuIcon.vue'
@@ -68,7 +68,7 @@
       />
       <nav class="app-header__header-actions">
         <AccountIcon class="app-header__action-icon" />
-        <FavouriteIcon class="app-header__action-icon" />
+        <FavoriteIcon class="app-header__action-icon" />
       </nav>
     </div>
     <CartIcon class="app-header__action-icon" />
