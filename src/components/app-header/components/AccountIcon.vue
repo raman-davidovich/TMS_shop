@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="icon-container">
-      <svg width="32" height="32" viewBox="0 0 26 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="29" fill="none">
         <path
-          d="M19 9C19 14 16 18 13 18C10 18 7 14 7 9C7 4 9 1 13 1C17 1 19 4 19 9ZM1 28H25C25 19 19 18 13 18C7 18 1 19 1 28Z"
-          stroke="#737373"
-          stroke-width="2"
+          stroke="#252B42"
           stroke-linecap="round"
           stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9c0 5-3 9-6 9s-6-4-6-9 2-8 6-8 6 3 6 8ZM1 28h24c0-9-6-10-12-10S1 19 1 28Z"
         />
       </svg>
     </div>

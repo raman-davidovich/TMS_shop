@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="icon-container">
-      <svg width="32" height="32" viewBox="0 0 28 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="16" fill="none">
         <path
-          d="M0.666992 0.934814H27.3337V3.60148H0.666992V0.934814ZM7.33366 7.60148H27.3337V10.2681H7.33366V7.60148ZM15.667 14.2681H27.3337V16.9348H15.667V14.2681Z"
-          fill="#737373"
+          fill="#000"
+          d="M.667 0h26.667v2.667H.667V0Zm6.667 6.667h20v2.666h-20V6.667Zm8.333 6.666h11.667V16H15.667v-2.667Z"
         />
       </svg>
     </div>
