@@ -1,16 +1,14 @@
 <script setup lang="ts">
   import { APP_NAVIGATION_COLOR_TYPES, APP_NAVIGATION_ITEMS } from './AppNavigation.types'
   import { MENU_ITEMS } from './AppNavigation.constants'
-  import { computed, type ComputedRef } from 'vue'
+  import { computed } from 'vue'
 
   defineProps<{
     colorType: APP_NAVIGATION_COLOR_TYPES
     isShort?: boolean
   }>()
 
-  const filteredMenuItems: ComputedRef<APP_NAVIGATION_ITEMS[]> = computed(() => {
-    return MENU_ITEMS.slice(0, -1)
-  })
+  const filteredMenuItems = computed<APP_NAVIGATION_ITEMS[]>(() => MENU_ITEMS.slice(0, -1))
 </script>
 
 <template>
