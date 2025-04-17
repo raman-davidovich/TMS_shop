@@ -2,10 +2,10 @@
   import { ref, onMounted, onBeforeUnmount, watch, type Ref } from 'vue'
   import AppNavigation from '../shared/app-navigation/AppNavigation.vue'
   import { APP_NAVIGATION_COLOR_TYPES } from '../shared/app-navigation/AppNavigation.types'
-  import FavoriteIcon from './FavoriteIcon.vue'
-  import CartIcon from './CartIcon.vue'
-  import AccountIcon from './AccountIcon.vue'
-  import BurgerMenuIcon from './BurgerMenuIcon.vue'
+  import FavoriteIcon from './components/FavoriteIcon.vue'
+  import CartIcon from './components/CartIcon.vue'
+  import AccountIcon from './components/AccountIcon.vue'
+  import BurgerMenuIcon from './components/BurgerMenuIcon.vue'
   import { SCREEN_BREAKPOINTS } from './AppHeader.constants'
 
   const isMenuOpen: Ref<boolean> = ref(false)
