@@ -64,11 +64,7 @@
       </AppIcon>
     </button>
     <div class="app-header__menu" :class="{ 'app-header__menu_active': isMenuOpen }" v-show="!isMobile || isMenuOpen">
-      <AppNavigation
-        :color-type="APP_NAVIGATION_COLOR_TYPES.TERTIARY"
-        isShort
-        class="app-navigation app-navigation_mobile"
-      />
+      <AppNavigation :color-type="APP_NAVIGATION_COLOR_TYPES.TERTIARY" isShort />
       <nav class="app-header__header-actions">
         <AppIcon>
           <AccountIcon />
@@ -146,13 +142,6 @@
       @include spacing.tablet {
         flex-direction: column;
       }
-    }
-  }
-
-  .app-navigation {
-    &_mobile {
-      align-items: flex-start;
-      flex-direction: column;
     }
   }
 </style>
