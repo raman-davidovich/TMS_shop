@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount, watch, type Ref } from 'vue'
   import AppNavigation from '../shared/app-navigation/AppNavigation.vue'
   import { APP_NAVIGATION_COLOR_TYPES } from '../shared/app-navigation/AppNavigation.types'
+  import AppIcon from '../shared/app-icon/AppIcon.vue'
   import FavoriteIcon from './components/FavoriteIcon.vue'
   import CartIcon from './components/CartIcon.vue'
   import AccountIcon from './components/AccountIcon.vue'
@@ -58,7 +59,9 @@
 <template>
   <header class="app-header">
     <button class="app-header__burger-menu" @click.stop="isMenuOpen = !isMenuOpen" v-show="isMobile">
-      <BurgerMenuIcon class="app-header__action-icon" />
+      <AppIcon>
+        <BurgerMenuIcon />
+      </AppIcon>
     </button>
     <div class="app-header__menu" :class="{ 'app-header__menu_active': isMenuOpen }" v-show="!isMobile || isMenuOpen">
       <AppNavigation
@@ -67,11 +70,17 @@
         class="app-navigation app-navigation_mobile"
       />
       <nav class="app-header__header-actions">
-        <AccountIcon class="app-header__action-icon" />
-        <FavoriteIcon class="app-header__action-icon" />
+        <AppIcon>
+          <AccountIcon />
+        </AppIcon>
+        <AppIcon>
+          <FavoriteIcon />
+        </AppIcon>
       </nav>
     </div>
-    <CartIcon class="app-header__action-icon" />
+    <AppIcon>
+      <CartIcon />
+    </AppIcon>
   </header>
 </template>
 
@@ -136,19 +145,6 @@
 
       @include spacing.tablet {
         flex-direction: column;
-      }
-    }
-
-    &__action-icon {
-      align-items: center;
-      border-radius: 50%;
-      display: flex;
-      height: 56px;
-      justify-content: center;
-      width: 56px;
-
-      &:hover {
-        background-color: colors.$hoverBgColor;
       }
     }
   }
