@@ -7,7 +7,7 @@
   import CartIcon from './components/CartIcon.vue'
   import AccountIcon from './components/AccountIcon.vue'
   import BurgerMenuIcon from './components/BurgerMenuIcon.vue'
-  import { SCREEN_BREAKPOINTS } from './AppHeader.constants'
+  import { SCREEN_BREAKPOINTS, HEADER_CLASSES } from './AppHeader.constants'
 
   const isMenuOpen: Ref<boolean> = ref(false)
   const isMobile: Ref<boolean> = ref(false)
@@ -23,7 +23,7 @@
 
   const closeMenu = (event: MouseEvent): void => {
     const target = event.target as HTMLElement
-    if (!target.closest('.app-header__burger-menu') && !target.closest('.app-header__menu')) {
+    if (!target.closest(HEADER_CLASSES.BURGER_MENU) && !target.closest(HEADER_CLASSES.MENU)) {
       isMenuOpen.value = false
     }
   }
