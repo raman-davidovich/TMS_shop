@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount, watch, type Ref } from 'vue'
   import AppNavigation from '../shared/app-navigation/AppNavigation.vue'
   import { APP_NAVIGATION_COLOR_TYPES } from '../shared/app-navigation/AppNavigation.types'
   import AppIcon from '../shared/app-icon/AppIcon.vue'
@@ -7,58 +6,16 @@
   import CartIcon from './components/CartIcon.vue'
   import AccountIcon from './components/AccountIcon.vue'
   import BurgerMenuIcon from './components/BurgerMenuIcon.vue'
-  import { SCREEN_BREAKPOINTS, HEADER_CLASSES } from './AppHeader.constants'
+  import { useMobileDetection } from './composables/useMobileDetection'
+  import { useMenuManagement } from './composables/useMenuManagement'
 
-  const isMenuOpen: Ref<boolean> = ref(false)
-  const isMobile: Ref<boolean> = ref(false)
-
-  const checkScreenSize = (): void => {
-    isMobile.value = window.innerWidth < SCREEN_BREAKPOINTS.LG
-  }
-
-  const onResize = (): void => {
-    checkScreenSize()
-    if (!isMobile.value) isMenuOpen.value = false
-  }
-
-  const closeMenu = (event: MouseEvent): void => {
-    const target = event.target as HTMLElement
-    if (!target.closest(HEADER_CLASSES.BURGER_MENU) && !target.closest(HEADER_CLASSES.MENU)) {
-      isMenuOpen.value = false
-    }
-  }
-
-  const handleKeydown = (event: KeyboardEvent): void => {
-    if (event.key === 'Escape') {
-      isMenuOpen.value = false
-    }
-  }
-
-  watch(isMenuOpen, (status: boolean) => {
-    if (status) {
-      document.addEventListener('click', closeMenu)
-      document.addEventListener('keydown', handleKeydown)
-    } else {
-      document.removeEventListener('click', closeMenu)
-      document.removeEventListener('keydown', handleKeydown)
-    }
-  })
-
-  onMounted((): void => {
-    checkScreenSize()
-    window.addEventListener('resize', onResize)
-  })
-
-  onBeforeUnmount((): void => {
-    window.removeEventListener('resize', onResize)
-    document.removeEventListener('click', closeMenu)
-    document.removeEventListener('keydown', handleKeydown)
-  })
+  const { isMobile } = useMobileDetection()
+  const { isMenuOpen, toggleMenu } = useMenuManagement()
 </script>
 
 <template>
   <header class="app-header">
-    <button class="app-header__burger-menu" @click.stop="isMenuOpen = !isMenuOpen" v-show="isMobile">
+    <button class="app-header__burger-menu" @click.stop="toggleMenu" v-show="isMobile">
       <AppIcon>
         <BurgerMenuIcon />
       </AppIcon>
