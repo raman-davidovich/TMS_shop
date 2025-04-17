@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="icon-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="29" fill="none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 29" fill="none">
         <path
           stroke="#252B42"
           stroke-linecap="round"
