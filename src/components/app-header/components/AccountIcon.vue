@@ -3,7 +3,7 @@
     <div class="icon-container">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 29" fill="none">
         <path
-          stroke="#252B42"
+          stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
