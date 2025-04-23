@@ -8,7 +8,8 @@ export const useMenuManagement = () => {
 
   const closeMenu = (event: MouseEvent) => {
     const target = event.target as HTMLElement
-    if (!target.closest(HEADER_CLASSES.BURGER_MENU) && !target.closest(HEADER_CLASSES.MENU)) isMenuOpen.value = false
+    if (!target.closest(`.${HEADER_CLASSES.BURGER_MENU}`) && !target.closest(`.${HEADER_CLASSES.MENU}`))
+      isMenuOpen.value = false
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {

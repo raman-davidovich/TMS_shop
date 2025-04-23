@@ -3,6 +3,6 @@ export const SCREEN_BREAKPOINTS = {
 }
 
 export const HEADER_CLASSES = {
-  MENU: '.app-header__menu',
-  BURGER_MENU: '.app-header__burger-menu'
-}
+  MENU: 'app-header__menu',
+  BURGER_MENU: 'app-header__burger-menu'
+} as const
