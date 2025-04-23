@@ -1,13 +1,21 @@
+<script setup lang="ts">
+  import { RouterLink } from 'vue-router'
+
+  defineProps<{
+    routeName?: string
+  }>()
+</script>
+
 <template>
-  <div class="app-icon">
+  <RouterLink :to="{ name: routeName }" class="header-link">
     <slot />
-  </div>
+  </RouterLink>
 </template>
 
 <style scoped lang="scss">
   @use '@styles/colors.scss' as colors;
 
-  .app-icon {
+  .header-link {
     align-items: center;
     border-radius: 50%;
     color: colors.$tertiaryFontColor;
