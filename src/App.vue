@@ -7,9 +7,3 @@
   <AppHeader />
   <AppFooter />
 </template>
-
-<style scoped lang="scss">
-  div {
-    color: #000;
-  }
-</style>
