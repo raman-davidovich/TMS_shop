@@ -1,17 +1,21 @@
 <script setup lang="ts">
-  import { APP_NAVIGATION_COLOR_TYPES } from './AppNavigation.types'
+  import { APP_NAVIGATION_COLOR_TYPES, APP_NAVIGATION_ITEMS } from './AppNavigation.types'
   import { MENU_ITEMS } from './AppNavigation.constants'
+  import { computed } from 'vue'
 
   defineProps<{
     colorType: APP_NAVIGATION_COLOR_TYPES
+    isShort?: boolean
   }>()
+
+  const filteredMenuItems = computed<APP_NAVIGATION_ITEMS[]>(() => MENU_ITEMS.slice(0, -1))
 </script>
 
 <template>
   <nav class="app-navigation">
     <ul class="app-navigation__list">
       <li
-        v-for="item in MENU_ITEMS"
+        v-for="item in isShort ? filteredMenuItems : MENU_ITEMS"
         :key="item"
         class="app-navigation__item"
         :class="[`app-navigation__item_${colorType}`]"
@@ -32,6 +36,8 @@
     &__list {
       display: flex;
       gap: 21px;
+      margin: 0;
+      padding: 0;
     }
 
     &__item {
@@ -70,6 +76,10 @@
 
       &_additional {
         color: colors.$additionalFontColor;
+      }
+
+      &_tertiary {
+        color: colors.$tertiaryFontColor;
       }
     }
 
