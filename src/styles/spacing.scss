@@ -1,7 +1,22 @@
 $breakpoints: (
+  xl: 1300px,
   lg: 1150px,
-  md: 1025px
+  md: 1025px,
+  sm: 870px,
+  xs: 550px
 ) !default;
+
+@mixin tv {
+  @media (max-width: map-get($breakpoints, xl)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: map-get($breakpoints, lg)) {
+    @content;
+  }
+}
 
 @mixin tablet {
   @media (max-width: map-get($breakpoints, md)) {
@@ -9,8 +24,14 @@ $breakpoints: (
   }
 }
 
-@mixin desktop {
-  @media (max-width: map-get($breakpoints, lg)) {
+@mixin folder {
+  @media (max-width: map-get($breakpoints, sm)) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (max-width: map-get($breakpoints, xs)) {
     @content;
   }
 }
