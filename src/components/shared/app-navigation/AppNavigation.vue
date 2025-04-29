@@ -1,11 +1,10 @@
 <script setup lang="ts">
-  import { APP_NAVIGATION_COLOR_TYPES } from './AppNavigation.types'
+  import { APP_NAVIGATION_COLOR_TYPES, APP_NAVIGATION_ITEMS } from './AppNavigation.types'
   import { MENU_ITEMS } from './AppNavigation.constants'
   import { RouterLink } from 'vue-router'
 
   defineProps<{
     colorType: APP_NAVIGATION_COLOR_TYPES
-    isShort?: boolean
   }>()
 </script>
 
