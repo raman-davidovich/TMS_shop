@@ -17,6 +17,7 @@
 
   .header-link {
     align-items: center;
+    border: 1px solid transparent;
     border-radius: 50%;
     color: colors.$tertiaryFontColor;
     display: flex;
@@ -31,19 +32,21 @@
     &:hover,
     &:focus,
     &:focus-visible {
-      background-color: colors.$hoverBgColor;
+      background-color: rgba(colors.$hoverBgColor, 0.4);
       outline: none;
-      transform: scale(1.05);
     }
 
     &:active {
-      background-color: colors.$hoverBgColor;
-      transform: scale(0.95);
+      background-color: rgba(colors.$hoverBgColor, 0.4);
     }
 
     &:focus,
     &:focus-visible {
       box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
+    }
+
+    &:hover {
+      border: 1px solid rgba(colors.$primaryFontColor, 0.5);
     }
 
     :deep(svg) {
