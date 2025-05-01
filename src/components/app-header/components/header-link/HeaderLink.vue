@@ -1,13 +1,16 @@
 <script setup lang="ts">
   import { RouterLink } from 'vue-router'
+  import { useLinkRouteDependentSettings } from './composables/useLinkRouteDependentSettings'
 
   defineProps<{
     routeName?: string
   }>()
+
+  const { isHomeRoute } = useLinkRouteDependentSettings()
 </script>
 
 <template>
-  <RouterLink :to="{ name: routeName }" class="header-link">
+  <RouterLink :to="{ name: routeName }" class="header-link" :class="{ 'header-link_accent': !isHomeRoute }">
     <slot />
   </RouterLink>
 </template>
@@ -50,6 +53,10 @@
     :deep(svg) {
       height: 32px;
       width: 32px;
+    }
+
+    &_accent:hover {
+      border: 1px solid rgba(colors.$accentElementColor, 0.5);
     }
   }
 </style>
