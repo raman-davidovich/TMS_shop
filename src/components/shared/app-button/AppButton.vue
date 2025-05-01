@@ -5,12 +5,13 @@
   defineProps<{
     buttonTitle: string
     route: (typeof ROUTE_NAMES)[keyof typeof ROUTE_NAMES]
+    isTransparent?: boolean
   }>()
 </script>
 
 <template>
   <RouterLink :to="{ name: route }" :style="{ textDecoration: 'none', outline: 'none' }">
-    <button class="app-button">
+    <button class="app-button" :class="{ 'app-button_transparent': isTransparent }">
       {{ buttonTitle }}
     </button>
   </RouterLink>
@@ -48,6 +49,19 @@
     &:focus,
     &:focus-visible {
       box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
+    }
+
+    &_transparent {
+      background: rgba(colors.$darkBgColor, 0.1);
+      border: 1px solid colors.$primaryFontColor;
+      color: colors.$primaryFontColor;
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        border: 1px solid colors.$hoverBgColor;
+        color: colors.$accentElementColor;
+      }
     }
   }
 </style>
