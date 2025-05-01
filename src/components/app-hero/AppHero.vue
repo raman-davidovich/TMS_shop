@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AppButton from '../shared/app-button/AppButton.vue'
+  import PageLink from '../shared/page-link/PageLink.vue'
   import { ROUTE_NAMES } from '@/router/router.constants'
   import { useRouteDependentSettings } from './composables/useRouteDependentSettings'
 
@@ -24,7 +24,7 @@
     <h3 class="app-hero__subtitle">SUMMER 2020</h3>
     <h1 class="app-hero__title">{{ title }}</h1>
     <p class="app-hero__description">Find The Perfect style for you</p>
-    <AppButton class="app-hero__button" v-if="withButton" buttonTitle="Shop Now" :route="ROUTE_NAMES.SHOP" />
+    <PageLink class="app-hero__button" v-if="withButton" buttonTitle="Shop Now" :route="ROUTE_NAMES.SHOP" />
   </section>
 </template>
 
