@@ -2,12 +2,12 @@ import { computed, onMounted, onUnmounted, ref, type ComputedRef } from 'vue'
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
 import { ROUTE_NAMES } from '../../../router/router.constants'
 
-interface RouteDependentSettings {
-  padding: ComputedRef<string>
-  marginTop: ComputedRef<string>
+interface HeroRouteDependentSettings {
+  heroPadding: ComputedRef<string>
+  heroMarginTop: ComputedRef<string>
 }
 
-export const useRouteDependentSettings = (): RouteDependentSettings => {
+export const useHeroRouteDependentSettings = (): HeroRouteDependentSettings => {
   const route: RouteLocationNormalizedLoaded = useRoute()
   const isTablet = ref<boolean>(false)
   const isShopRoute = computed<boolean>(() => route.name === ROUTE_NAMES.SHOP)
@@ -25,14 +25,14 @@ export const useRouteDependentSettings = (): RouteDependentSettings => {
     window.removeEventListener('resize', updateMediaQuery)
   })
 
-  const padding = computed<string>(() => {
+  const heroPadding = computed<string>(() => {
     if (isShopRoute.value) {
       return isTablet.value ? '75px 0' : '183px 0 75px'
     }
     return '262px 0 134px'
   })
 
-  const marginTop = computed<string>(() => (isShopRoute.value ? '0' : '-108px'))
+  const heroMarginTop = computed<string>(() => (isShopRoute.value ? '0' : '-108px'))
 
-  return { padding, marginTop }
+  return { heroPadding, heroMarginTop }
 }

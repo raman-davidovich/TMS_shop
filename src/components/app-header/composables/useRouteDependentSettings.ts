@@ -3,22 +3,22 @@ import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
 import { APP_NAVIGATION_COLOR_TYPES } from '../../shared/app-navigation/AppNavigation.types'
 import { ROUTE_NAMES } from '../../../router/router.constants'
 
-interface RouteDependentSettings {
+interface HeaderRouteDependentSettings {
   isTransparent: ComputedRef<boolean>
-  colorType: ComputedRef<APP_NAVIGATION_COLOR_TYPES>
+  headerNavigationColorType: ComputedRef<APP_NAVIGATION_COLOR_TYPES>
 }
 
-export const useRouteDependentSettings = (isMenuOpen?: Ref<boolean>): RouteDependentSettings => {
+export const useHeaderRouteDependentSettings = (isMenuOpen?: Ref<boolean>): HeaderRouteDependentSettings => {
   const route: RouteLocationNormalizedLoaded = useRoute()
 
   const isHomeRoute = computed<boolean>(() => route.name === ROUTE_NAMES.HOME)
 
   const isTransparent = computed<boolean>(() => isHomeRoute.value)
 
-  const colorType = computed<APP_NAVIGATION_COLOR_TYPES>(() => {
+  const headerNavigationColorType = computed<APP_NAVIGATION_COLOR_TYPES>(() => {
     if (isMenuOpen?.value) return APP_NAVIGATION_COLOR_TYPES.PRIMARY
     return isHomeRoute.value ? APP_NAVIGATION_COLOR_TYPES.PRIMARY : APP_NAVIGATION_COLOR_TYPES.TERTIARY
   })
 
-  return { isTransparent, colorType }
+  return { isTransparent, headerNavigationColorType }
 }

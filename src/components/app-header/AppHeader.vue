@@ -8,13 +8,13 @@
   import BurgerMenuIcon from './components/BurgerMenuIcon.vue'
   import { useMobileDetection } from './composables/useMobileDetection'
   import { useMenuManagement } from './composables/useMenuManagement'
-  import { useRouteDependentSettings } from './composables/useRouteDependentSettings'
+  import { useHeaderRouteDependentSettings } from './composables/useRouteDependentSettings'
   import { ROUTE_NAMES } from '@/router/router.constants'
   import { HEADER_CLASSES } from './AppHeader.constants'
 
   const { isMobile } = useMobileDetection()
   const { isMenuOpen, toggleMenu } = useMenuManagement()
-  const { isTransparent, colorType } = useRouteDependentSettings(ref(isMenuOpen))
+  const { isTransparent, headerNavigationColorType } = useHeaderRouteDependentSettings(ref(isMenuOpen))
 
   const menuClasses = computed<Record<string, boolean>>(() => ({
     [HEADER_CLASSES.MENU]: true,
@@ -25,30 +25,34 @@
 <template>
   <header class="app-header" :style="isTransparent ? { background: 'transparent' } : {}">
     <button :class="HEADER_CLASSES.BURGER_MENU" @click.stop="toggleMenu" v-show="isMobile">
-      <HeaderLink class="app-header__link" :class="[`app-header__link_${colorType}`]">
+      <HeaderLink class="app-header__link" :class="[`app-header__link_${headerNavigationColorType}`]">
         <BurgerMenuIcon />
       </HeaderLink>
     </button>
     <div :class="menuClasses" v-show="!isMobile || isMenuOpen">
-      <AppNavigation :colorType />
+      <AppNavigation :colorType="headerNavigationColorType" />
       <nav class="app-header__header-actions">
         <HeaderLink
           :routeName="ROUTE_NAMES.ACCOUNT"
           class="app-header__link"
-          :class="[`app-header__link_${colorType}`]"
+          :class="[`app-header__link_${headerNavigationColorType}`]"
         >
           <AccountIcon />
         </HeaderLink>
         <HeaderLink
           :routeName="ROUTE_NAMES.FAVORITE"
           class="app-header__link"
-          :class="[`app-header__link_${colorType}`]"
+          :class="[`app-header__link_${headerNavigationColorType}`]"
         >
           <FavoriteIcon />
         </HeaderLink>
       </nav>
     </div>
-    <HeaderLink :routeName="ROUTE_NAMES.CART" class="app-header__link" :class="[`app-header__link_${colorType}`]">
+    <HeaderLink
+      :routeName="ROUTE_NAMES.CART"
+      class="app-header__link"
+      :class="[`app-header__link_${headerNavigationColorType}`]"
+    >
       <CartIcon />
     </HeaderLink>
   </header>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import PageLink from '../shared/page-link/PageLink.vue'
   import { ROUTE_NAMES } from '@/router/router.constants'
-  import { useRouteDependentSettings } from './composables/useRouteDependentSettings'
+  import { useHeroRouteDependentSettings } from './composables/useRouteDependentSettings'
 
   const { title, withButton, imageURL } = defineProps<{
     title: string
@@ -9,7 +9,7 @@
     imageURL: string
   }>()
 
-  const { padding, marginTop } = useRouteDependentSettings()
+  const { heroPadding, heroMarginTop } = useHeroRouteDependentSettings()
 </script>
 
 <template>
@@ -17,8 +17,8 @@
     class="app-hero"
     :style="{
       backgroundImage: `url(${imageURL})`,
-      padding: padding,
-      '--margin-top': marginTop
+      padding: heroPadding,
+      '--margin-top': heroMarginTop
     }"
   >
     <h3 class="app-hero__subtitle">SUMMER 2020</h3>
