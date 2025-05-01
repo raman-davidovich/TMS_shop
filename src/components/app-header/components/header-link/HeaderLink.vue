@@ -30,7 +30,6 @@
     width: 56px;
 
     &:hover,
-    &:focus,
     &:focus-visible {
       background-color: rgba(colors.$hoverBgColor, 0.4);
       outline: none;
@@ -40,7 +39,6 @@
       background-color: rgba(colors.$hoverBgColor, 0.4);
     }
 
-    &:focus,
     &:focus-visible {
       box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
     }

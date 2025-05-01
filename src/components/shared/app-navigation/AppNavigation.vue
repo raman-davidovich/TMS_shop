@@ -87,13 +87,11 @@
       text-decoration: none;
 
       &:hover,
-      &:focus,
       &:focus-visible {
         outline: none;
         transform: scale(1.05);
       }
 
-      &:focus,
       &:focus-visible {
         color: colors.$accentElementColor;
       }
