@@ -1,9 +1,14 @@
-import { computed, Ref } from 'vue'
+import { computed, type Ref, type ComputedRef } from 'vue'
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
 import { APP_NAVIGATION_COLOR_TYPES } from '../../shared/app-navigation/AppNavigation.types'
 import { ROUTE_NAMES } from '../../../router/router.constants'
 
-export const useRouteDependentSettings = (isMenuOpen?: Ref<boolean>) => {
+interface RouteDependentSettings {
+  isTransparent: ComputedRef<boolean>
+  colorType: ComputedRef<APP_NAVIGATION_COLOR_TYPES>
+}
+
+export const useRouteDependentSettings = (isMenuOpen?: Ref<boolean>): RouteDependentSettings => {
   const route: RouteLocationNormalizedLoaded = useRoute()
 
   const isHomeRoute = computed<boolean>(() => route.name === ROUTE_NAMES.HOME)

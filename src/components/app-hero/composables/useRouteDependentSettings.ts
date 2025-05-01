@@ -1,8 +1,13 @@
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, type ComputedRef } from 'vue'
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
 import { ROUTE_NAMES } from '../../../router/router.constants'
 
-export const useRouteDependentSettings = () => {
+interface RouteDependentSettings {
+  padding: ComputedRef<string>
+  marginTop: ComputedRef<string>
+}
+
+export const useRouteDependentSettings = (): RouteDependentSettings => {
   const route: RouteLocationNormalizedLoaded = useRoute()
   const isTablet = ref<boolean>(false)
   const isShopRoute = computed<boolean>(() => route.name === ROUTE_NAMES.SHOP)
