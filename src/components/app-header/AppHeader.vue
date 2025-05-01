@@ -8,7 +8,7 @@
   import BurgerMenuIcon from './components/BurgerMenuIcon.vue'
   import { useMobileDetection } from './composables/useMobileDetection'
   import { useMenuManagement } from './composables/useMenuManagement'
-  import { useHeaderRouteDependentSettings } from './composables/useRouteDependentSettings'
+  import { useHeaderRouteDependentSettings } from './composables/useHeaderRouteDependentSettings'
   import { ROUTE_NAMES } from '@/router/router.constants'
   import { HEADER_CLASSES } from './AppHeader.constants'
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import PageLink from '../shared/page-link/PageLink.vue'
   import { ROUTE_NAMES } from '@/router/router.constants'
-  import { useHeroRouteDependentSettings } from './composables/useRouteDependentSettings'
+  import { useHeroRouteDependentSettings } from './composables/useHeroRouteDependentSettings'
 
   const { title, withButton, imageURL } = defineProps<{
     title: string
