@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AppButton from '@/components/shared/app-button/AppButton.vue'
+  import PageLink from '@/components/shared/page-link/PageLink.vue'
   import { ROUTE_NAMES } from '@/router/router.constants'
 
   defineProps<{
@@ -10,7 +10,7 @@
 
 <template>
   <div class="gallery-item" :style="{ backgroundImage: `url(${imageURL})` }">
-    <AppButton :buttonTitle="buttonTitle" :route="ROUTE_NAMES.SHOP" isTransparent />
+    <PageLink :buttonTitle="buttonTitle" :route="ROUTE_NAMES.SHOP" isTransparent />
   </div>
 </template>
 

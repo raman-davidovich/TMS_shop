@@ -1,24 +1,23 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
   import { ROUTE_NAMES } from '../../../router/router.constants'
   import { RouterLink } from 'vue-router'
 
-  defineProps<{
+  const props = defineProps<{
     buttonTitle: string
     route: (typeof ROUTE_NAMES)[keyof typeof ROUTE_NAMES]
     isTransparent?: boolean
   }>()
+
+  const linkClasses = computed<Record<string, boolean>>(() => ({
+    'page-link': true,
+    'page-link_transparent': props.isTransparent
+  }))
 </script>
 
 <template>
-<<<<<<< HEAD:src/components/shared/app-button/AppButton.vue
-  <RouterLink :to="{ name: route }" :style="{ textDecoration: 'none', outline: 'none' }">
-    <button class="app-button" :class="{ 'app-button_transparent': isTransparent }">
-      {{ buttonTitle }}
-    </button>
-=======
-  <RouterLink :to="{ name: route }" class="page-link">
+  <RouterLink :to="{ name: route }" :class="linkClasses">
     {{ buttonTitle }}
->>>>>>> feature_22/implement-section-wrapper-component:src/components/shared/page-link/PageLink.vue
   </RouterLink>
 </template>
 
