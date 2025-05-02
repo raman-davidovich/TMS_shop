@@ -28,7 +28,7 @@
 
   const linkClasses = computed<Record<string, boolean>>(() => ({
     'app-header__link': true,
-    [`app-header__link_${headerNavigationColorType.value}`]: true
+    [`app-header__link_color_${headerNavigationColorType.value}`]: true
   }))
 </script>
 
@@ -128,11 +128,11 @@
     }
 
     &__link {
-      &_primary {
+      &_color_primary {
         color: colors.$primaryFontColor;
       }
 
-      &_tertiary {
+      &_color_tertiary {
         color: colors.$tertiaryFontColor;
       }
     }
