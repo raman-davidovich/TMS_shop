@@ -8,47 +8,49 @@
   import BurgerMenuIcon from './components/BurgerMenuIcon.vue'
   import { useMobileDetection } from './composables/useMobileDetection'
   import { useMenuManagement } from './composables/useMenuManagement'
-  import { useRouteDependentSettings } from './composables/useRouteDependentSettings'
+  import { useHeaderRouteDependentSettings } from './composables/useHeaderRouteDependentSettings'
   import { ROUTE_NAMES } from '@/router/router.constants'
   import { HEADER_CLASSES } from './AppHeader.constants'
 
   const { isMobile } = useMobileDetection()
-  const { isMenuOpen, toggleMenu } = useMenuManagement()
-  const { isTransparent, colorType } = useRouteDependentSettings(ref(isMenuOpen))
+  const { isMenuOpen, toggleMenu, closeMobileMenu } = useMenuManagement()
+  const { isHeaderTransparent, headerNavigationColorType } = useHeaderRouteDependentSettings(ref(isMenuOpen))
 
   const menuClasses = computed<Record<string, boolean>>(() => ({
     [HEADER_CLASSES.MENU]: true,
     [`${HEADER_CLASSES.MENU}_active`]: isMenuOpen.value
   }))
+
+  const headerClasses = computed<Record<string, boolean>>(() => ({
+    'app-header': true,
+    'app-header_transparent': isHeaderTransparent.value
+  }))
+
+  const linkClasses = computed<Record<string, boolean>>(() => ({
+    'app-header__link': true,
+    [`app-header__link_color_${headerNavigationColorType.value}`]: true
+  }))
 </script>
 
 <template>
-  <header class="app-header" :style="isTransparent ? { background: 'transparent' } : {}">
+  <header :class="headerClasses">
     <button :class="HEADER_CLASSES.BURGER_MENU" @click.stop="toggleMenu" v-show="isMobile">
-      <HeaderLink class="app-header__link" :class="[`app-header__link_${colorType}`]">
+      <HeaderLink :class="linkClasses">
         <BurgerMenuIcon />
       </HeaderLink>
     </button>
     <div :class="menuClasses" v-show="!isMobile || isMenuOpen">
-      <AppNavigation :colorType />
+      <AppNavigation :colorType="headerNavigationColorType" :onLinkClick="isMobile ? closeMobileMenu : undefined" />
       <nav class="app-header__header-actions">
-        <HeaderLink
-          :routeName="ROUTE_NAMES.ACCOUNT"
-          class="app-header__link"
-          :class="[`app-header__link_${colorType}`]"
-        >
+        <HeaderLink :routeName="ROUTE_NAMES.ACCOUNT" :class="linkClasses" @click="isMobile && closeMobileMenu()">
           <AccountIcon />
         </HeaderLink>
-        <HeaderLink
-          :routeName="ROUTE_NAMES.FAVORITE"
-          class="app-header__link"
-          :class="[`app-header__link_${colorType}`]"
-        >
+        <HeaderLink :routeName="ROUTE_NAMES.FAVORITE" :class="linkClasses" @click="isMobile && closeMobileMenu()">
           <FavoriteIcon />
         </HeaderLink>
       </nav>
     </div>
-    <HeaderLink :routeName="ROUTE_NAMES.CART" class="app-header__link" :class="[`app-header__link_${colorType}`]">
+    <HeaderLink :routeName="ROUTE_NAMES.CART" :class="linkClasses">
       <CartIcon />
     </HeaderLink>
   </header>
@@ -70,6 +72,10 @@
     @include spacing.tablet {
       gap: 9px;
       padding-right: 12px;
+    }
+
+    &_transparent {
+      background: transparent;
     }
 
     &__burger-menu {
@@ -99,13 +105,15 @@
         height: 100vh;
         justify-content: center;
         position: fixed;
-        right: -100%;
+        right: 0;
         top: 0;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         width: 70%;
         z-index: 999;
 
         &_active {
-          right: 0;
+          transform: translateX(0);
         }
       }
     }
@@ -120,11 +128,11 @@
     }
 
     &__link {
-      &_primary {
+      &_color_primary {
         color: colors.$primaryFontColor;
       }
 
-      &_tertiary {
+      &_color_tertiary {
         color: colors.$tertiaryFontColor;
       }
     }

@@ -9,31 +9,31 @@
 </script>
 
 <template>
-  <RouterLink :to="{ name: route }" :style="{ textDecoration: 'none', outline: 'none' }">
-    <button class="app-button">
-      {{ buttonTitle }}
-    </button>
+  <RouterLink :to="{ name: route }" class="page-link">
+    {{ buttonTitle }}
   </RouterLink>
 </template>
 
 <style scoped lang="scss">
   @use '@styles/colors.scss' as colors;
 
-  .app-button {
+  .page-link {
+    background-color: colors.$hoverBgColor;
     border: none;
     color: colors.$accentElementColor;
     cursor: pointer;
     font-weight: 700;
     letter-spacing: 0.1px;
     line-height: 1.5em;
+    outline: none;
     padding: 16px 46px;
+    text-decoration: none;
     transition:
       background-color 0.3s ease,
       transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 0.3s ease;
 
     &:hover,
-    &:focus,
     &:focus-visible {
       background-color: colors.$hoverBgColor;
       outline: none;
@@ -45,7 +45,6 @@
       transform: scale(0.95);
     }
 
-    &:focus,
     &:focus-visible {
       box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
     }

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-  import { APP_NAVIGATION_COLOR_TYPES, APP_NAVIGATION_ITEMS } from './AppNavigation.types'
+  import { APP_NAVIGATION_COLOR_TYPES } from './AppNavigation.types'
   import { MENU_ITEMS } from './AppNavigation.constants'
   import { RouterLink } from 'vue-router'
 
   defineProps<{
     colorType: APP_NAVIGATION_COLOR_TYPES
+    onLinkClick?: () => void
   }>()
 </script>
 
@@ -17,7 +18,7 @@
         class="app-navigation__item"
         :class="[`app-navigation__item_${colorType}`]"
       >
-        <RouterLink :to="{ name: item.toLowerCase() }" class="app-navigation__link">
+        <RouterLink :to="{ name: item.toLowerCase() }" class="app-navigation__link" @click.stop="onLinkClick?.()">
           {{ item }}
         </RouterLink>
       </li>
@@ -59,12 +60,17 @@
         width: 0;
       }
 
-      &:hover {
+      &:hover,
+      &:focus-within {
         color: colors.$accentElementColor;
 
-        &::after {
+        &:not(:has(.router-link-active))::after {
           width: 100%;
         }
+      }
+
+      &:focus-visible {
+        outline: none;
       }
 
       &_primary {
@@ -85,17 +91,16 @@
       display: block;
       position: relative;
       text-decoration: none;
+      transition: transform 0.2s ease;
 
-      &:hover,
-      &:focus,
       &:focus-visible {
         outline: none;
         transform: scale(1.05);
       }
 
-      &:focus,
-      &:focus-visible {
+      &.router-link-active {
         color: colors.$accentElementColor;
+        cursor: default;
       }
     }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import AppButton from '../shared/app-button/AppButton.vue'
+  import PageLink from '../shared/page-link/PageLink.vue'
   import { ROUTE_NAMES } from '@/router/router.constants'
-  import { useRouteDependentSettings } from './composables/useRouteDependentSettings'
+  import { useHeroRouteDependentSettings } from './composables/useHeroRouteDependentSettings'
 
   const { title, withButton, imageURL } = defineProps<{
     title: string
@@ -9,7 +9,7 @@
     imageURL: string
   }>()
 
-  const { padding, marginTop } = useRouteDependentSettings()
+  const { heroPadding, heroMarginTop } = useHeroRouteDependentSettings()
 </script>
 
 <template>
@@ -17,14 +17,14 @@
     class="app-hero"
     :style="{
       backgroundImage: `url(${imageURL})`,
-      padding: padding,
-      '--margin-top': marginTop
+      padding: heroPadding,
+      '--margin-top': heroMarginTop
     }"
   >
     <h3 class="app-hero__subtitle">SUMMER 2020</h3>
     <h1 class="app-hero__title">{{ title }}</h1>
     <p class="app-hero__description">Find The Perfect style for you</p>
-    <AppButton class="app-hero__button" v-if="withButton" buttonTitle="Shop Now" :route="ROUTE_NAMES.SHOP" />
+    <PageLink class="app-hero__button" v-if="withButton" buttonTitle="Shop Now" :route="ROUTE_NAMES.SHOP" />
   </section>
 </template>
 
@@ -41,7 +41,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: -108px;
+    margin-top: calc(-1 * var(--header-height));
 
     @include spacing.tv {
       background-position: 0 -100px;
