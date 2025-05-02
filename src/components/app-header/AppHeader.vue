@@ -14,7 +14,7 @@
 
   const { isMobile } = useMobileDetection()
   const { isMenuOpen, toggleMenu, closeMobileMenu } = useMenuManagement()
-  const { isTransparent, headerNavigationColorType } = useHeaderRouteDependentSettings(ref(isMenuOpen))
+  const { isHeaderTransparent, headerNavigationColorType } = useHeaderRouteDependentSettings(ref(isMenuOpen))
 
   const menuClasses = computed<Record<string, boolean>>(() => ({
     [HEADER_CLASSES.MENU]: true,
@@ -23,7 +23,7 @@
 
   const headerClasses = computed<Record<string, boolean>>(() => ({
     'app-header': true,
-    'app-header_transparent': isTransparent.value
+    'app-header_transparent': isHeaderTransparent.value
   }))
 
   const linkClasses = computed<Record<string, boolean>>(() => ({
