@@ -13,7 +13,7 @@
   import { HEADER_CLASSES } from './AppHeader.constants'
 
   const { isMobile } = useMobileDetection()
-  const { isMenuOpen, toggleMenu } = useMenuManagement()
+  const { isMenuOpen, toggleMenu, closeMobileMenu } = useMenuManagement()
   const { isTransparent, headerNavigationColorType } = useHeaderRouteDependentSettings(ref(isMenuOpen))
 
   const menuClasses = computed<Record<string, boolean>>(() => ({
@@ -40,12 +40,12 @@
       </HeaderLink>
     </button>
     <div :class="menuClasses" v-show="!isMobile || isMenuOpen">
-      <AppNavigation :colorType="headerNavigationColorType" />
+      <AppNavigation :colorType="headerNavigationColorType" :onLinkClick="isMobile ? closeMobileMenu : undefined" />
       <nav class="app-header__header-actions">
-        <HeaderLink :routeName="ROUTE_NAMES.ACCOUNT" :class="linkClasses">
+        <HeaderLink :routeName="ROUTE_NAMES.ACCOUNT" :class="linkClasses" @click="isMobile && closeMobileMenu()">
           <AccountIcon />
         </HeaderLink>
-        <HeaderLink :routeName="ROUTE_NAMES.FAVORITE" :class="linkClasses">
+        <HeaderLink :routeName="ROUTE_NAMES.FAVORITE" :class="linkClasses" @click="isMobile && closeMobileMenu()">
           <FavoriteIcon />
         </HeaderLink>
       </nav>
@@ -105,13 +105,15 @@
         height: 100vh;
         justify-content: center;
         position: fixed;
-        right: -100%;
+        right: 0;
         top: 0;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         width: 70%;
         z-index: 999;
 
         &_active {
-          right: 0;
+          transform: translateX(0);
         }
       }
     }

@@ -4,6 +4,7 @@ import { HEADER_CLASSES } from '../AppHeader.constants'
 interface MenuManagementReturn {
   isMenuOpen: Ref<boolean>
   toggleMenu: () => boolean
+  closeMobileMenu: () => void
 }
 
 export const useMenuManagement = (): MenuManagementReturn => {
@@ -15,6 +16,12 @@ export const useMenuManagement = (): MenuManagementReturn => {
     const target = event.target as HTMLElement
     if (!target.closest(`.${HEADER_CLASSES.BURGER_MENU}`) && !target.closest(`.${HEADER_CLASSES.MENU}`))
       isMenuOpen.value = false
+  }
+
+  const closeMobileMenu = (): void => {
+    setTimeout(() => {
+      isMenuOpen.value = false
+    }, 1000)
   }
 
   const handleKeyDown = (event: KeyboardEvent): void => {
@@ -31,5 +38,5 @@ export const useMenuManagement = (): MenuManagementReturn => {
     }
   })
 
-  return { isMenuOpen, toggleMenu }
+  return { isMenuOpen, toggleMenu, closeMobileMenu }
 }

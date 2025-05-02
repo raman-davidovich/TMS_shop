@@ -5,6 +5,7 @@
 
   defineProps<{
     colorType: APP_NAVIGATION_COLOR_TYPES
+    onLinkClick?: () => void
   }>()
 </script>
 
@@ -17,7 +18,7 @@
         class="app-navigation__item"
         :class="[`app-navigation__item_${colorType}`]"
       >
-        <RouterLink :to="{ name: item.toLowerCase() }" class="app-navigation__link">
+        <RouterLink :to="{ name: item.toLowerCase() }" class="app-navigation__link" @click.stop="onLinkClick?.()">
           {{ item }}
         </RouterLink>
       </li>
