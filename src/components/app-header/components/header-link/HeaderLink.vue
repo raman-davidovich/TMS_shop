@@ -32,7 +32,7 @@
       box-shadow 0.3s ease;
     width: 56px;
 
-    &:hover,
+    &:not(.router-link-active):hover,
     &:focus-visible {
       background-color: rgba(colors.$hoverBgColor, 0.4);
       outline: none;
@@ -46,7 +46,7 @@
       box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
     }
 
-    &:hover {
+    &:not(.router-link-active):hover {
       border: 1px solid rgba(colors.$primaryFontColor, 0.5);
     }
 
@@ -55,8 +55,13 @@
       width: 32px;
     }
 
-    &_accent:hover {
+    &_accent:not(.router-link-active):hover {
       border: 1px solid rgba(colors.$accentElementColor, 0.5);
+    }
+
+    &.router-link-active {
+      color: colors.$accentElementColor;
+      cursor: default;
     }
   }
 </style>

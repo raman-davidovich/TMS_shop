@@ -59,12 +59,17 @@
         width: 0;
       }
 
-      &:hover {
+      &:hover,
+      &:focus-within {
         color: colors.$accentElementColor;
 
-        &::after {
+        &:not(:has(.router-link-active))::after {
           width: 100%;
         }
+      }
+
+      &:focus-visible {
+        outline: none;
       }
 
       &_primary {
@@ -85,15 +90,16 @@
       display: block;
       position: relative;
       text-decoration: none;
+      transition: transform 0.2s ease;
 
-      &:hover,
       &:focus-visible {
         outline: none;
         transform: scale(1.05);
       }
 
-      &:focus-visible {
+      &.router-link-active {
         color: colors.$accentElementColor;
+        cursor: default;
       }
     }
 
