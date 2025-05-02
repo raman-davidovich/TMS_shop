@@ -1,18 +1,30 @@
 import { ref, watch, type Ref } from 'vue'
 import { HEADER_CLASSES } from '../AppHeader.constants'
 
-export const useMenuManagement = () => {
+interface MenuManagementReturn {
+  isMenuOpen: Ref<boolean>
+  toggleMenu: () => boolean
+  closeMobileMenu: () => void
+}
+
+export const useMenuManagement = (): MenuManagementReturn => {
   const isMenuOpen: Ref<boolean> = ref(false)
 
   const toggleMenu = (): boolean => (isMenuOpen.value = !isMenuOpen.value)
 
-  const closeMenu = (event: MouseEvent) => {
+  const closeMenu = (event: MouseEvent): void => {
     const target = event.target as HTMLElement
     if (!target.closest(`.${HEADER_CLASSES.BURGER_MENU}`) && !target.closest(`.${HEADER_CLASSES.MENU}`))
       isMenuOpen.value = false
   }
 
-  const handleKeyDown = (event: KeyboardEvent) => {
+  const closeMobileMenu = (): void => {
+    setTimeout(() => {
+      isMenuOpen.value = false
+    }, 1000)
+  }
+
+  const handleKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Escape') isMenuOpen.value = false
   }
 
@@ -26,5 +38,5 @@ export const useMenuManagement = () => {
     }
   })
 
-  return { isMenuOpen, toggleMenu }
+  return { isMenuOpen, toggleMenu, closeMobileMenu }
 }

@@ -1,17 +1,23 @@
 import { ref, onMounted, onBeforeUnmount, type Ref } from 'vue'
 import { SCREEN_BREAKPOINTS } from '../AppHeader.constants'
 
-export const useMobileDetection = () => {
+interface MobileDetectionReturn {
+  isMobile: Ref<boolean>
+}
+
+export const useMobileDetection = (): MobileDetectionReturn => {
   const isMobile: Ref<boolean> = ref(false)
 
-  const checkScreenSize = (): boolean => (isMobile.value = window.innerWidth < SCREEN_BREAKPOINTS.LG)
+  const checkScreenSize = (): void => {
+    isMobile.value = window.innerWidth < SCREEN_BREAKPOINTS.LG
+  }
 
-  onMounted(() => {
+  onMounted((): void => {
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
   })
 
-  onBeforeUnmount(() => window.removeEventListener('resize', checkScreenSize))
+  onBeforeUnmount((): void => window.removeEventListener('resize', checkScreenSize))
 
   return { isMobile }
 }
