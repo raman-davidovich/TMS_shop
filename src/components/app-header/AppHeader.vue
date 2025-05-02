@@ -20,39 +20,37 @@
     [HEADER_CLASSES.MENU]: true,
     [`${HEADER_CLASSES.MENU}_active`]: isMenuOpen.value
   }))
+
+  const headerClasses = computed<Record<string, boolean>>(() => ({
+    'app-header': true,
+    'app-header_transparent': isTransparent.value
+  }))
+
+  const linkClasses = computed<Record<string, boolean>>(() => ({
+    'app-header__link': true,
+    [`app-header__link_${headerNavigationColorType.value}`]: true
+  }))
 </script>
 
 <template>
-  <header class="app-header" :style="isTransparent ? { background: 'transparent' } : {}">
+  <header :class="headerClasses">
     <button :class="HEADER_CLASSES.BURGER_MENU" @click.stop="toggleMenu" v-show="isMobile">
-      <HeaderLink class="app-header__link" :class="[`app-header__link_${headerNavigationColorType}`]">
+      <HeaderLink :class="linkClasses">
         <BurgerMenuIcon />
       </HeaderLink>
     </button>
     <div :class="menuClasses" v-show="!isMobile || isMenuOpen">
       <AppNavigation :colorType="headerNavigationColorType" />
       <nav class="app-header__header-actions">
-        <HeaderLink
-          :routeName="ROUTE_NAMES.ACCOUNT"
-          class="app-header__link"
-          :class="[`app-header__link_${headerNavigationColorType}`]"
-        >
+        <HeaderLink :routeName="ROUTE_NAMES.ACCOUNT" :class="linkClasses">
           <AccountIcon />
         </HeaderLink>
-        <HeaderLink
-          :routeName="ROUTE_NAMES.FAVORITE"
-          class="app-header__link"
-          :class="[`app-header__link_${headerNavigationColorType}`]"
-        >
+        <HeaderLink :routeName="ROUTE_NAMES.FAVORITE" :class="linkClasses">
           <FavoriteIcon />
         </HeaderLink>
       </nav>
     </div>
-    <HeaderLink
-      :routeName="ROUTE_NAMES.CART"
-      class="app-header__link"
-      :class="[`app-header__link_${headerNavigationColorType}`]"
-    >
+    <HeaderLink :routeName="ROUTE_NAMES.CART" :class="linkClasses">
       <CartIcon />
     </HeaderLink>
   </header>
@@ -74,6 +72,10 @@
     @include spacing.tablet {
       gap: 9px;
       padding-right: 12px;
+    }
+
+    &_transparent {
+      background: transparent;
     }
 
     &__burger-menu {
