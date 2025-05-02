@@ -32,7 +32,11 @@ export const useHeroRouteDependentSettings = (): HeroRouteDependentSettings => {
     return '262px 0 134px'
   })
 
-  const heroMarginTop = computed<string>(() => (isShopRoute.value ? '0' : '-108px'))
+  const headerHeight = computed<number>(() => {
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height'))
+  })
+
+  const heroMarginTop = computed<string>(() => (isShopRoute.value ? '0' : `-${headerHeight.value}px`))
 
   return { heroPadding, heroMarginTop }
 }

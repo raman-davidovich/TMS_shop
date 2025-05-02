@@ -41,7 +41,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: -108px;
+    margin-top: calc(-1 * var(--header-height));
 
     @include spacing.tv {
       background-position: 0 -100px;
