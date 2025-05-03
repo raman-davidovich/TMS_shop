@@ -1,13 +1,16 @@
 <script setup lang="ts">
   import { RouterLink } from 'vue-router'
+  import { useLinkRouteDependentSettings } from './composables/useLinkRouteDependentSettings'
 
   defineProps<{
     routeName?: string
   }>()
+
+  const { isHomeRoute } = useLinkRouteDependentSettings()
 </script>
 
 <template>
-  <RouterLink :to="{ name: routeName }" class="header-link">
+  <RouterLink :to="{ name: routeName }" class="header-link" :class="{ 'header-link_accent': !isHomeRoute }">
     <slot />
   </RouterLink>
 </template>
@@ -17,6 +20,7 @@
 
   .header-link {
     align-items: center;
+    border: 1px solid transparent;
     border-radius: 50%;
     color: colors.$tertiaryFontColor;
     display: flex;
@@ -28,27 +32,36 @@
       box-shadow 0.3s ease;
     width: 56px;
 
-    &:hover,
-    &:focus,
+    &:not(.router-link-active):hover,
     &:focus-visible {
-      background-color: colors.$hoverBgColor;
+      background-color: rgba(colors.$hoverBgColor, 0.4);
       outline: none;
-      transform: scale(1.05);
     }
 
     &:active {
-      background-color: colors.$hoverBgColor;
-      transform: scale(0.95);
+      background-color: rgba(colors.$hoverBgColor, 0.4);
     }
 
-    &:focus,
     &:focus-visible {
       box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
+    }
+
+    &:not(.router-link-active):hover {
+      border: 1px solid rgba(colors.$primaryFontColor, 0.5);
     }
 
     :deep(svg) {
       height: 32px;
       width: 32px;
+    }
+
+    &_accent:not(.router-link-active):hover {
+      border: 1px solid rgba(colors.$accentElementColor, 0.5);
+    }
+
+    &.router-link-active {
+      color: colors.$accentElementColor;
+      cursor: default;
     }
   }
 </style>
