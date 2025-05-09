@@ -14,7 +14,10 @@ export const useMenuManagement = (): MenuManagementReturn => {
 
   const closeMenu = (event: MouseEvent): void => {
     const target = event.target as HTMLElement
-    if (!target.closest(`.${HEADER_CLASSES.BURGER_MENU}`) && !target.closest(`.${HEADER_CLASSES.MENU}`))
+    if (
+      !target.closest(`.${HEADER_CLASSES.BURGER_MENU}`) &&
+      !target.closest(`.${HEADER_CLASSES.MENU}`)
+    )
       isMenuOpen.value = false
   }
 
