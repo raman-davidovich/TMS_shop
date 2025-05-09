@@ -1,10 +1,17 @@
 $breakpoints: (
+  xxl: 1422px,
   xl: 1300px,
   lg: 1150px,
   md: 1025px,
   sm: 870px,
   xs: 550px
 ) !default;
+
+@mixin wall {
+  @media (max-width: map-get($breakpoints, xxl)) {
+    @content;
+  }
+}
 
 @mixin tv {
   @media (max-width: map-get($breakpoints, xl)) {
