@@ -7,7 +7,9 @@
 
 <template>
   <section class="section-wrapper">
-    <h3 class="section-wrapper__title" :class="{ 'section-wrapper__title_narrow': isMarginNarrow }">{{ title }}</h3>
+    <h3 class="section-wrapper__title" :class="{ 'section-wrapper__title_narrow': isMarginNarrow }">
+      {{ title }}
+    </h3>
     <slot />
   </section>
 </template>
