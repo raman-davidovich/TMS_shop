@@ -30,6 +30,7 @@
     }
 
     @include spacing.folder {
+      grid-gap: 10px;
       grid-template-columns: 1fr;
       grid-template-rows: repeat(6, 1fr);
     }
