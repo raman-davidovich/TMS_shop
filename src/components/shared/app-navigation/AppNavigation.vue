@@ -18,7 +18,11 @@
         class="app-navigation__item"
         :class="[`app-navigation__item_${colorType}`]"
       >
-        <RouterLink :to="{ name: item.toLowerCase() }" class="app-navigation__link" @click.stop="onLinkClick?.()">
+        <RouterLink
+          :to="{ name: item.toLowerCase() }"
+          class="app-navigation__link"
+          @click.stop="onLinkClick?.()"
+        >
           {{ item }}
         </RouterLink>
       </li>

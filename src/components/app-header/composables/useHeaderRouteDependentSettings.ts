@@ -8,7 +8,9 @@ interface HeaderRouteDependentSettingsReturn {
   headerNavigationColorType: ComputedRef<APP_NAVIGATION_COLOR_TYPES>
 }
 
-export const useHeaderRouteDependentSettings = (isMenuOpen?: Ref<boolean>): HeaderRouteDependentSettingsReturn => {
+export const useHeaderRouteDependentSettings = (
+  isMenuOpen?: Ref<boolean>
+): HeaderRouteDependentSettingsReturn => {
   const route: RouteLocationNormalizedLoaded = useRoute()
 
   const isHomeRoute = computed<boolean>(() => route.name === ROUTE_NAMES.HOME)
@@ -17,7 +19,9 @@ export const useHeaderRouteDependentSettings = (isMenuOpen?: Ref<boolean>): Head
 
   const headerNavigationColorType = computed<APP_NAVIGATION_COLOR_TYPES>(() => {
     if (isMenuOpen?.value) return APP_NAVIGATION_COLOR_TYPES.PRIMARY
-    return isHomeRoute.value ? APP_NAVIGATION_COLOR_TYPES.PRIMARY : APP_NAVIGATION_COLOR_TYPES.TERTIARY
+    return isHomeRoute.value
+      ? APP_NAVIGATION_COLOR_TYPES.PRIMARY
+      : APP_NAVIGATION_COLOR_TYPES.TERTIARY
   })
 
   return { isHeaderTransparent, headerNavigationColorType }
