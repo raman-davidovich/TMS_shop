@@ -7,7 +7,11 @@
 
 <template>
   <section class="section-wrapper">
-    <h3 v-if="title" class="section-wrapper__title" :class="{ 'section-wrapper__title_narrow': isMarginNarrow }">
+    <h3
+      v-if="title"
+      class="section-wrapper__title"
+      :class="{ 'section-wrapper__title_narrow': isMarginNarrow }"
+    >
       {{ title }}
     </h3>
     <slot />
