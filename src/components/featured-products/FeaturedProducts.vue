@@ -4,17 +4,25 @@
   import { useFilterProducts } from './composables/useFilterProducts'
   import { TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
   import FeaturedProductsTabs from './components/featured-products-tabs/FeaturedProductsTabs.vue'
+  import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
 
   const activeTab = ref<TABS>(TABS.FEATURED)
 
-  const filteredProducts = computed<ReturnType<typeof useFilterProducts>>(() => useFilterProducts(activeTab.value))
+  const filteredProducts = computed<ReturnType<typeof useFilterProducts>>(() =>
+    useFilterProducts(activeTab.value)
+  )
 </script>
 
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
     <TransitionGroup name="list" tag="ul" class="featured-products__product-list">
-      <AppProductCard v-for="product in filteredProducts" :key="product.id" v-bind="product" />
+      <AppProductCard
+        v-for="product in filteredProducts"
+        :key="product.id"
+        v-bind="product"
+        :cardType="CARD_TYPES.FEATURED"
+      />
     </TransitionGroup>
   </div>
 </template>
