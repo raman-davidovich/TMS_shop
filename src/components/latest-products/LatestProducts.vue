@@ -1,17 +1,29 @@
 <script setup lang="ts">
-  import { LATEST_PRODUCTS } from '../shared/app-product-card/AppProductCard.constants'
+  import { computed } from 'vue'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
   import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
+  import { useProductStore } from '@/stores/productStore'
+  import { FirebaseProductType } from '../shared/app-product-card/AppProductCard.types'
+
+  const productStore = useProductStore()
+
+  const latestProducts = computed<FirebaseProductType[]>(() => productStore.latestProducts)
 </script>
 
 <template>
   <ul class="latest-products">
-    <AppProductCard
-      v-for="product in LATEST_PRODUCTS"
-      :key="product.id"
-      v-bind="product"
-      :cardType="CARD_TYPES.LATEST"
-    />
+    <template v-if="!productStore.isLoading">
+      <AppProductCard
+        v-for="product in latestProducts"
+        :key="product.id"
+        v-bind="product"
+        :cardType="CARD_TYPES.LATEST"
+      />
+    </template>
+
+    <div v-else>Loading latest products...</div>
+
+    <div v-if="productStore.error">{{ productStore.error }}</div>
   </ul>
 </template>
 

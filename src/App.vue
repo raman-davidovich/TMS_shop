@@ -1,7 +1,15 @@
 <script setup lang="ts">
+  import { onMounted } from 'vue'
   import AppHeader from './components/app-header/AppHeader.vue'
   import AppFooter from './components/app-footer/AppFooter.vue'
   import { RouterView } from 'vue-router'
+  import { useProductStore } from '@/stores/productStore'
+
+  const productStore = useProductStore()
+
+  onMounted(() => {
+    productStore.fetchProducts()
+  })
 </script>
 
 <template>

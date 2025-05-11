@@ -5,17 +5,20 @@
   import { TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
   import FeaturedProductsTabs from './components/featured-products-tabs/FeaturedProductsTabs.vue'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
+  import { useProductStore } from '@/stores/productStore'
 
+  const productStore = useProductStore()
   const activeTab = ref<TABS>(TABS.FEATURED)
 
   const filteredProducts = computed<ReturnType<typeof useFilterProducts>>(() =>
-    useFilterProducts(activeTab.value)
+    useFilterProducts(activeTab.value, productStore.featuredProducts)
   )
 </script>
 
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
+    <div v-if="productStore.isLoading">Loading products...</div>
     <TransitionGroup name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"
@@ -24,6 +27,7 @@
         :cardType="CARD_TYPES.FEATURED"
       />
     </TransitionGroup>
+    <div v-if="productStore.error">{{ productStore.error }}</div>
   </div>
 </template>
 
