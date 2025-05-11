@@ -22,8 +22,8 @@ type ProductColorType = (typeof PRODUCT_COLORS)[keyof typeof PRODUCT_COLORS]
 type ProductSizeType = (typeof PRODUCT_SIZES)[keyof typeof PRODUCT_SIZES]
 export type ProductPrice = { dollars: number; cents: number }
 
-export type FeaturedProductType = {
-  id: number
+export type FirebaseProductType = {
+  id: string
   image: string
   name: string
   baseColor: string
@@ -31,6 +31,6 @@ export type FeaturedProductType = {
   availableColors: ReadonlyArray<ProductColorType>
   availableSizes: ReadonlyArray<ProductSizeType>
   featured: boolean
-  createdAt: Date
+  createdAt: { seconds: number; nanoseconds: number }
   numberOfSales: number
 }

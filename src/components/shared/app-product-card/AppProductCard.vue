@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import {
-    FeaturedProductType,
+    FirebaseProductType,
     CARD_TYPES
   } from '../../shared/app-product-card/AppProductCard.types'
   import SizeItem from './components/size-item/SizeItem.vue'
@@ -9,7 +9,7 @@
   import { useProductCard } from './composables/useProductCard'
 
   const { image, name, baseColor, price, availableColors, availableSizes, cardType } = defineProps<
-    FeaturedProductType & { cardType?: CARD_TYPES }
+    FirebaseProductType & { cardType?: CARD_TYPES }
   >()
 
   const { isLiked, shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
