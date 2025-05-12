@@ -10,7 +10,11 @@
 </script>
 
 <template>
-  <RouterLink :to="{ name: routeName }" class="header-link" :class="{ 'header-link_accent': !isHomeRoute }">
+  <RouterLink
+    :to="{ name: routeName }"
+    class="header-link"
+    :class="{ 'header-link_accent': !isHomeRoute }"
+  >
     <slot />
   </RouterLink>
 </template>

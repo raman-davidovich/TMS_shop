@@ -1,8 +1,10 @@
+@use './colors.scss' as colors;
 @use 'normalize-scss/sass/normalize.scss' as *;
 @import 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap';
 @include normalize;
 
 body {
+  background-color: colors.$primaryFontColor;
   font-family: Montserrat, sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
