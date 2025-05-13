@@ -28,7 +28,7 @@ export type ProductType = {
   price: ProductPrice
   availableColors: PRODUCT_COLORS[]
   availableSizes: PRODUCT_SIZES[]
-  featured: boolean
+  isFeatured: boolean
   createdAt: { seconds: number; nanoseconds: number }
   numberOfSales: number
 }

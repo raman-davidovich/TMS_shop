@@ -2,7 +2,7 @@ import type { ProductType } from '../../shared/app-product-card/AppProductCard.t
 import { TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
 
 export const useFilterProducts = (activeTab: TABS, dbProducts: ProductType[]): ProductType[] => {
-  const products = [...dbProducts].filter((product) => product.featured === true)
+  const products = [...dbProducts].filter((product) => product.isFeatured === true)
 
   switch (activeTab) {
     case TABS.FEATURED:
