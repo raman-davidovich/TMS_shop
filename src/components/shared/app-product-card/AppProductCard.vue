@@ -5,7 +5,8 @@
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
 
-  const { image, name, baseColor, price, availableColors, availableSizes } = defineProps<FeaturedProductType>()
+  const { image, name, baseColor, price, availableColors, availableSizes } =
+    defineProps<FeaturedProductType>()
 
   const { isLiked, shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
 </script>
@@ -37,7 +38,12 @@
       />
     </ul>
     <ul class="app-product-card__sizes-list">
-      <SizeItem v-for="size in availableSizes" :key="size" :size-title="size" class="app-product-card__size-item" />
+      <SizeItem
+        v-for="size in availableSizes"
+        :key="size"
+        :size-title="size"
+        class="app-product-card__size-item"
+      />
     </ul>
   </li>
 </template>
