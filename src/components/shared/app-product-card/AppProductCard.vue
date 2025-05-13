@@ -1,8 +1,5 @@
 <script setup lang="ts">
-  import {
-    FirebaseProductType,
-    CARD_TYPES
-  } from '../../shared/app-product-card/AppProductCard.types'
+  import { ProductType, CARD_TYPES } from '../../shared/app-product-card/AppProductCard.types'
   import SizeItem from './components/size-item/SizeItem.vue'
   import ColorPaletteItem from './components/color-palette-item/ColorPaletteItem.vue'
   import LikeIcon from './components/LikeIcon.vue'
@@ -10,7 +7,7 @@
   import { useFavoriteStore } from '@/stores/favoriteStore/favoriteStore'
 
   const { id, image, name, baseColor, price, availableColors, availableSizes, cardType } =
-    defineProps<FirebaseProductType & { cardType?: CARD_TYPES }>()
+    defineProps<ProductType & { cardType?: CARD_TYPES }>()
 
   const { shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
 
@@ -46,7 +43,7 @@
     <h3 class="app-product-card__title" :class="[`app-product-card__title_${cardType}`]">
       {{ name }}
       <br />
-      <span class="app-product-card__title_color_tertiary">{{ baseColor }}</span>
+      <span class="app-product-card__title_color_tertiary">({{ baseColor }})</span>
     </h3>
     <h4 class="app-product-card__price" :class="[`app-product-card__price_${cardType}`]">
       {{ formattedPrice }}

@@ -1,10 +1,7 @@
-import type { FirebaseProductType } from '../../shared/app-product-card/AppProductCard.types'
+import type { ProductType } from '../../shared/app-product-card/AppProductCard.types'
 import { TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
 
-export const useFilterProducts = (
-  activeTab: TABS,
-  dbProducts: FirebaseProductType[]
-): FirebaseProductType[] => {
+export const useFilterProducts = (activeTab: TABS, dbProducts: ProductType[]): ProductType[] => {
   const products = [...dbProducts].filter((product) => product.featured === true)
 
   switch (activeTab) {
