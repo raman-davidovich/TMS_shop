@@ -40,7 +40,11 @@
         }"
       />
     </button>
-    <h3 class="app-product-card__title" :class="[`app-product-card__title_${cardType}`]">
+    <h3
+      class="app-product-card__title"
+      :class="[`app-product-card__title_${cardType}`]"
+      :title="name"
+    >
       {{ name }}
       <br />
       <span class="app-product-card__title_color_tertiary">({{ baseColor }})</span>
@@ -84,12 +88,16 @@
     &_featured {
       border-radius: 0 0 10px 10px;
       gap: 14px;
+      width: 242px;
     }
 
     &_latest {
       gap: 10px;
+      width: 240px;
 
       @include spacing.phone {
+        width: 320px;
+
         #{$self}__sizes-list {
           display: none;
         }
@@ -181,9 +189,12 @@
 
     &__title {
       color: colors.$secondaryFontColor;
-      margin: 0;
-      margin-left: 8px;
+      margin: 0 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
       transition: color 0.3s ease;
+      white-space: nowrap;
+      width: calc(100% - 16px); // take into account horizontal margins
 
       &_featured {
         font-size: 1.25em;
@@ -224,10 +235,13 @@
     }
 
     &__color-palette {
+      align-items: center;
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      margin-left: 8px;
-      padding: 0;
+      justify-content: flex-start;
+      max-width: 100%;
+      padding: 0 8px;
     }
 
     &__color-item {
