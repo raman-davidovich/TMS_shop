@@ -9,7 +9,7 @@ export const useFilterProducts = (
 
   switch (activeTab) {
     case TABS.FEATURED:
-      return products.filter((product) => product.featured === true)
+      return products.sort((a, b) => b.price.dollars - a.price.dollars)
     case TABS.NEW:
       return products.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
     case TABS.POPULAR:

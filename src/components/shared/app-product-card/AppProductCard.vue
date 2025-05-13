@@ -7,12 +7,19 @@
   import ColorPaletteItem from './components/color-palette-item/ColorPaletteItem.vue'
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
+  import { useFavoriteStore } from '@/stores/favoriteStore/favoriteStore'
 
-  const { image, name, baseColor, price, availableColors, availableSizes, cardType } = defineProps<
-    FirebaseProductType & { cardType?: CARD_TYPES }
-  >()
+  const { id, image, name, baseColor, price, availableColors, availableSizes, cardType } =
+    defineProps<FirebaseProductType & { cardType?: CARD_TYPES }>()
 
-  const { isLiked, shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
+  const { shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
+
+  const favoriteStore = useFavoriteStore()
+
+  const handleLikeClick = () => {
+    favoriteStore.toggleFavorite(id)
+    toggleLike()
+  }
 </script>
 
 <template>
@@ -23,11 +30,15 @@
       class="app-product-card__image"
       :class="[`app-product-card__image_${cardType}`]"
     />
-    <button class="app-product-card__like-button" @click="toggleLike" aria-label="Add to favorites">
+    <button
+      class="app-product-card__like-button"
+      @click="handleLikeClick"
+      aria-label="Add to favorites"
+    >
       <LikeIcon
         class="app-product-card__like-icon"
         :class="{
-          'app-product-card__like-icon_active': isLiked,
+          'app-product-card__like-icon_active': favoriteStore.isFavorite(id),
           'app-product-card__like-icon_animate': shouldAnimate
         }"
       />
