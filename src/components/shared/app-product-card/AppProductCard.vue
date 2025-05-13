@@ -182,6 +182,7 @@
     &__title {
       color: colors.$secondaryFontColor;
       margin: 0;
+      margin-left: 8px;
       transition: color 0.3s ease;
 
       &_featured {
@@ -208,6 +209,7 @@
       font-weight: 500;
       letter-spacing: 0.2px;
       margin: 0;
+      margin-left: 8px;
       transition: all 0.3s ease;
 
       &_featured {
@@ -224,6 +226,7 @@
     &__color-palette {
       display: flex;
       gap: 8px;
+      margin-left: 8px;
       padding: 0;
     }
 
@@ -238,6 +241,7 @@
     &__sizes-list {
       display: flex;
       gap: 11px;
+      margin: 0 0 8px 8px;
       padding: 0;
     }
 
