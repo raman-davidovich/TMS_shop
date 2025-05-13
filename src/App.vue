@@ -4,8 +4,12 @@
   import AppFooter from './components/app-footer/AppFooter.vue'
   import { RouterView } from 'vue-router'
   import { useProductStore } from '@/stores/productStore'
+  import { useFavoriteStore } from '@/stores/favoriteStore/favoriteStore'
 
   const productStore = useProductStore()
+  const favoriteStore = useFavoriteStore()
+
+  favoriteStore.initFromStorage()
 
   onMounted(() => {
     productStore.fetchProducts()
