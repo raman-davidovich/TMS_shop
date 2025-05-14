@@ -15,8 +15,15 @@ export const useProductCard = (price: ProductPrice): ProductCardComposable => {
     setTimeout(() => (shouldAnimate.value = false), 400)
   }
 
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: price.currency || 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+
   const formattedPrice = computed<string>(() => {
-    return `$${price.dollars}.${price.cents.toString().padStart(2, '0')}`
+    return formatter.format(price.value / 100)
   })
 
   return {

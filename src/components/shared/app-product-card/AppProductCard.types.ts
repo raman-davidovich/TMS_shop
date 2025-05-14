@@ -18,7 +18,7 @@ export enum CARD_TYPES {
   LATEST = 'latest'
 }
 
-export type ProductPrice = { dollars: number; cents: number }
+export type ProductPrice = { value: number; currency?: string }
 
 export type ProductType = {
   id: string

@@ -6,7 +6,7 @@ export const useFilterProducts = (activeTab: TABS, dbProducts: ProductType[]): P
 
   switch (activeTab) {
     case TABS.FEATURED:
-      return products.sort((a, b) => b.price.dollars - a.price.dollars)
+      return products.sort((a, b) => b.price.value - a.price.value)
     case TABS.NEW:
       return products.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
     case TABS.POPULAR:
