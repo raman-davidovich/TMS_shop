@@ -62,7 +62,6 @@
       color: colors.$primaryFontColor;
 
       &:hover,
-      &:focus,
       &:focus-visible {
         border: 1px solid colors.$hoverBgColor;
         color: colors.$accentElementColor;
