@@ -18,8 +18,8 @@
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
-    <div v-if="productStore.isLoading">Loading products...</div>
-    <TransitionGroup name="list" tag="ul" class="featured-products__product-list">
+    <div v-if="productStore.isLoading" class="featured-products__message">Loading products...</div>
+    <TransitionGroup v-else name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"
         :key="product.id"
@@ -41,6 +41,10 @@
 
     @include spacing.phone {
       gap: 30px;
+    }
+
+    &__message {
+      align-self: center;
     }
 
     &__product-list {
