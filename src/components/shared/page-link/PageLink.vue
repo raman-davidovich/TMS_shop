@@ -1,15 +1,22 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
   import { ROUTE_NAMES } from '../../../router/router.constants'
   import { RouterLink } from 'vue-router'
 
-  defineProps<{
+  const props = defineProps<{
     buttonTitle: string
     route: (typeof ROUTE_NAMES)[keyof typeof ROUTE_NAMES]
+    isTransparent?: boolean
   }>()
+
+  const linkClasses = computed<Record<string, boolean>>(() => ({
+    'page-link': true,
+    'page-link_transparent': props.isTransparent
+  }))
 </script>
 
 <template>
-  <RouterLink :to="{ name: route }" class="page-link">
+  <RouterLink :to="{ name: route }" :class="linkClasses">
     {{ buttonTitle }}
   </RouterLink>
 </template>
@@ -47,6 +54,18 @@
 
     &:focus-visible {
       box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
+    }
+
+    &_transparent {
+      background: rgba(colors.$darkBgColor, 0.1);
+      border: 1px solid colors.$primaryFontColor;
+      color: colors.$primaryFontColor;
+
+      &:hover,
+      &:focus-visible {
+        border: 1px solid colors.$hoverBgColor;
+        color: colors.$accentElementColor;
+      }
     }
   }
 </style>
