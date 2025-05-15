@@ -137,8 +137,12 @@
       font-weight: 400;
       letter-spacing: 0.2px;
       line-height: 1.5em;
-      margin: 0;
+      margin: 0 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
       transition: color 0.3s ease;
+      white-space: nowrap;
+      width: calc(100% - 16px); // take into account horizontal margin
 
       &_color_tertiary {
         color: colors.$tertiaryFontColor;
@@ -152,13 +156,18 @@
       letter-spacing: 0.2px;
       line-height: 1.6em;
       margin: 0;
+      margin-left: 8px;
       transition: all 0.3s ease;
     }
 
     &__color-palette {
+      align-items: center;
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      padding: 0;
+      justify-content: flex-start;
+      max-width: 100%;
+      padding: 0 8px;
     }
 
     &__color-item {
@@ -172,6 +181,7 @@
     &__sizes-list {
       display: flex;
       gap: 11px;
+      margin: 0 0 8px 8px;
       padding: 0;
     }
 
