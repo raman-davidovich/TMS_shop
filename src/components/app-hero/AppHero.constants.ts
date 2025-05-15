@@ -1,7 +1,7 @@
-import homePageHeroImage from '@assets/homePageHeroImage.webp'
-import shopPageHeroImage from '@assets/shopPageHeroImage.webp'
+import homePageHero from '@assets/homePageHero.webp'
+import shopPageHero from '@assets/shopPageHero.webp'
 
 export const APP_HERO_IMAGES = {
-  HOME: homePageHeroImage,
-  SHOP: shopPageHeroImage
+  HOME: homePageHero,
+  SHOP: shopPageHero
 } as const

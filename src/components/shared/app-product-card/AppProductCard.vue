@@ -55,6 +55,12 @@
         :size-title="size"
         class="app-product-card__size-item"
       />
+      <SizeItem
+        v-for="size in availableSizes"
+        :key="size"
+        :size-title="size"
+        class="app-product-card__size-item"
+      />
     </ul>
   </li>
 </template>

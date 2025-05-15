@@ -15,10 +15,23 @@ import { PRODUCT_COLORS, PRODUCT_SIZES, FeaturedProductType } from './AppProduct
 export const FEATURED_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   {
     id: 1,
-    image: featuredProductImage1,
+    image: featuredProduct1,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 42, cents: 0 },
+    availableColors: [
+      PRODUCT_COLORS.BLUE,
+      PRODUCT_COLORS.GREEN,
+      PRODUCT_COLORS.BROWN,
+      PRODUCT_COLORS.BLACK
+    ],
+    availableSizes: [
+      PRODUCT_SIZES.XL,
+      PRODUCT_SIZES.L,
+      PRODUCT_SIZES.M,
+      PRODUCT_SIZES.S,
+      PRODUCT_SIZES.XS
+    ],
     availableColors: [
       PRODUCT_COLORS.BLUE,
       PRODUCT_COLORS.GREEN,
@@ -38,7 +51,7 @@ export const FEATURED_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 2,
-    image: featuredProductImage2,
+    image: featuredProduct2,
     name: 'Cozy t-shirt',
     baseColor: '(White)',
     price: { dollars: 32, cents: 0 },
@@ -50,7 +63,7 @@ export const FEATURED_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 3,
-    image: featuredProductImage3,
+    image: featuredProduct3,
     name: 'Modern t-shirt',
     baseColor: '(White)',
     price: { dollars: 22, cents: 0 },
@@ -62,7 +75,7 @@ export const FEATURED_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 4,
-    image: featuredProductImage4,
+    image: featuredProduct4,
     name: 'Practical suspenders',
     baseColor: '(Brown)',
     price: { dollars: 12, cents: 0 },
