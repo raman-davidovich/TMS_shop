@@ -1,15 +1,15 @@
-import featuredProductImage1 from '@assets/featuredProductImage1.webp'
-import featuredProductImage2 from '@assets/featuredProductImage2.webp'
-import featuredProductImage3 from '@assets/featuredProductImage3.webp'
-import featuredProductImage4 from '@assets/featuredProductImage4.webp'
-import latestProductImage1 from '@assets/latestProductImage1.webp'
-import latestProductImage2 from '@assets/latestProductImage2.webp'
-import latestProductImage3 from '@assets/latestProductImage3.webp'
-import latestProductImage4 from '@assets/latestProductImage4.webp'
-import latestProductImage5 from '@assets/latestProductImage5.webp'
-import latestProductImage6 from '@assets/latestProductImage6.webp'
-import latestProductImage7 from '@assets/latestProductImage7.webp'
-import latestProductImage8 from '@assets/latestProductImage8.webp'
+import featuredProduct1 from '@assets/featuredProduct1.webp'
+import featuredProduct2 from '@assets/featuredProduct2.webp'
+import featuredProduct3 from '@assets/featuredProduct3.webp'
+import featuredProduct4 from '@assets/featuredProduct4.webp'
+import latestProduct1 from '@assets/latestProduct1.webp'
+import latestProduct2 from '@assets/latestProduct2.webp'
+import latestProduct3 from '@assets/latestProduct3.webp'
+import latestProduct4 from '@assets/latestProduct4.webp'
+import latestProduct5 from '@assets/latestProduct5.webp'
+import latestProduct6 from '@assets/latestProduct6.webp'
+import latestProduct7 from '@assets/latestProduct7.webp'
+import latestProduct8 from '@assets/latestProduct8.webp'
 import { PRODUCT_COLORS, PRODUCT_SIZES, FeaturedProductType } from './AppProductCard.types'
 
 export const FEATURED_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
@@ -19,19 +19,6 @@ export const FEATURED_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 42, cents: 0 },
-    availableColors: [
-      PRODUCT_COLORS.BLUE,
-      PRODUCT_COLORS.GREEN,
-      PRODUCT_COLORS.BROWN,
-      PRODUCT_COLORS.BLACK
-    ],
-    availableSizes: [
-      PRODUCT_SIZES.XL,
-      PRODUCT_SIZES.L,
-      PRODUCT_SIZES.M,
-      PRODUCT_SIZES.S,
-      PRODUCT_SIZES.XS
-    ],
     availableColors: [
       PRODUCT_COLORS.BLUE,
       PRODUCT_COLORS.GREEN,
@@ -90,7 +77,7 @@ export const FEATURED_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
 export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   {
     id: 1,
-    image: latestProductImage1,
+    image: latestProduct1,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
@@ -113,7 +100,7 @@ export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 2,
-    image: latestProductImage2,
+    image: latestProduct2,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
@@ -136,7 +123,7 @@ export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 3,
-    image: latestProductImage3,
+    image: latestProduct3,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
@@ -159,7 +146,7 @@ export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 4,
-    image: latestProductImage4,
+    image: latestProduct4,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
@@ -182,7 +169,7 @@ export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 5,
-    image: latestProductImage5,
+    image: latestProduct5,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
@@ -205,7 +192,7 @@ export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 6,
-    image: latestProductImage6,
+    image: latestProduct6,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
@@ -228,7 +215,7 @@ export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 7,
-    image: latestProductImage7,
+    image: latestProduct7,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
@@ -251,7 +238,7 @@ export const LATEST_PRODUCTS: ReadonlyArray<FeaturedProductType> = [
   },
   {
     id: 8,
-    image: latestProductImage8,
+    image: latestProduct8,
     name: 'Elegant blouse',
     baseColor: '(Red)',
     price: { dollars: 32, cents: 0 },
