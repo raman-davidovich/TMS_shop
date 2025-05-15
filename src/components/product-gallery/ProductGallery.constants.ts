@@ -1,14 +1,14 @@
 import { GalleryItem, GALLERY_CATEGORIES } from './ProductGallery.types'
-import productGalleryBagsImage from '@assets/productGalleryBagsImage.webp'
-import productGalleryClothesImage from '@assets/productGalleryClothesImage.webp'
-import productGalleryDressesImage from '@assets/productGalleryDressesImage.webp'
-import productGalleryHatsImage from '@assets/productGalleryHatsImage.webp'
-import productGalleryShoesImage from '@assets/productGalleryShoesImage.webp'
+import productGalleryBags from '@assets/productGalleryBags.webp'
+import productGalleryClothes from '@assets/productGalleryClothes.webp'
+import productGalleryDresses from '@assets/productGalleryDresses.webp'
+import productGalleryHats from '@assets/productGalleryHats.webp'
+import productGalleryShoes from '@assets/productGalleryShoes.webp'
 
 export const GALLERY_ITEMS: GalleryItem[] = [
-  { imageURL: productGalleryHatsImage, buttonTitle: GALLERY_CATEGORIES.HATS },
-  { imageURL: productGalleryShoesImage, buttonTitle: GALLERY_CATEGORIES.SHOES },
-  { imageURL: productGalleryDressesImage, buttonTitle: GALLERY_CATEGORIES.DRESSES },
-  { imageURL: productGalleryBagsImage, buttonTitle: GALLERY_CATEGORIES.BAGS },
-  { imageURL: productGalleryClothesImage, buttonTitle: GALLERY_CATEGORIES.CLOTHES }
+  { imageURL: productGalleryHats, buttonTitle: GALLERY_CATEGORIES.HATS },
+  { imageURL: productGalleryShoes, buttonTitle: GALLERY_CATEGORIES.SHOES },
+  { imageURL: productGalleryDresses, buttonTitle: GALLERY_CATEGORIES.DRESSES },
+  { imageURL: productGalleryBags, buttonTitle: GALLERY_CATEGORIES.BAGS },
+  { imageURL: productGalleryClothes, buttonTitle: GALLERY_CATEGORIES.CLOTHES }
 ] as const
