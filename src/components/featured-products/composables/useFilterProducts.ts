@@ -5,11 +5,11 @@ export const useFilterProducts = (
   activeTab: TABS,
   dbProducts: FirebaseProductType[]
 ): FirebaseProductType[] => {
-  const products = [...dbProducts].filter((product) => product.featured === true)
+  const products = [...dbProducts].filter((product) => product.isFeatured === true)
 
   switch (activeTab) {
     case TABS.FEATURED:
-      return products.filter((product) => product.featured === true)
+      return products.filter((product) => product.isFeatured === true)
     case TABS.NEW:
       return products.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
     case TABS.POPULAR:

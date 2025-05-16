@@ -18,9 +18,7 @@ export enum CARD_TYPES {
   LATEST = 'latest'
 }
 
-type ProductColorType = (typeof PRODUCT_COLORS)[keyof typeof PRODUCT_COLORS]
-type ProductSizeType = (typeof PRODUCT_SIZES)[keyof typeof PRODUCT_SIZES]
-export type ProductPrice = { dollars: number; cents: number }
+export type ProductPrice = { value: number; currency?: string }
 
 export type FirebaseProductType = {
   id: string
@@ -28,9 +26,9 @@ export type FirebaseProductType = {
   name: string
   baseColor: string
   price: ProductPrice
-  availableColors: ReadonlyArray<ProductColorType>
-  availableSizes: ReadonlyArray<ProductSizeType>
-  featured: boolean
+  availableColors: PRODUCT_COLORS[]
+  availableSizes: PRODUCT_SIZES[]
+  isFeatured: boolean
   createdAt: { seconds: number; nanoseconds: number }
   numberOfSales: number
 }
