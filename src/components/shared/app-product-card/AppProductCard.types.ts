@@ -15,7 +15,8 @@ export enum PRODUCT_SIZES {
 
 export enum CARD_TYPES {
   FEATURED = 'featured',
-  LATEST = 'latest'
+  LATEST = 'latest',
+  LONG = 'long'
 }
 
 export type ProductPrice = { value: number; currency?: string }
