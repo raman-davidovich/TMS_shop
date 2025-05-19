@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase/config'
 import { ProductType } from '../components/shared/app-product-card/AppProductCard.types'
+import { type SortOption } from './productStore.types'
 
 export const useProductStore = defineStore('product', {
   state: () => ({
@@ -44,6 +45,20 @@ export const useProductStore = defineStore('product', {
       } finally {
         this.isLoading = false
       }
+    },
+
+    getSortedProducts(sortBy: SortOption): ProductType[] {
+      return [...this.products].sort((a, b) => {
+        switch (sortBy) {
+          case 'price':
+            return b.price.value - a.price.value
+          case 'novelty':
+            return b.createdAt.seconds - a.createdAt.seconds
+          case 'popularity':
+          default:
+            return b.numberOfSales - a.numberOfSales
+        }
+      })
     }
   }
 })
