@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { TABS } from '../featured-products-tabs/FeaturedProductsTabs.constants'
+  import { FEATURED_PRODUCTS_TABS } from '../featured-products-tabs/FeaturedProductsTabs.constants'
 
   defineProps<{
-    title: TABS
+    title: FEATURED_PRODUCTS_TABS
     isActive?: boolean
   }>()
 

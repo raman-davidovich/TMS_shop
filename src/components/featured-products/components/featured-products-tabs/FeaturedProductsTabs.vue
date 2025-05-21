@@ -1,17 +1,17 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import FeaturedProductsTab from '../featured-products-tab/FeaturedProductsTab.vue'
-  import { TABS } from './FeaturedProductsTabs.constants'
+  import { FEATURED_PRODUCTS_TABS } from './FeaturedProductsTabs.constants'
 
   defineProps<{
-    modelValue: TABS
+    modelValue: FEATURED_PRODUCTS_TABS
   }>()
 
   const emit = defineEmits(['update:modelValue'])
 
-  const tabs = computed(() => Object.values(TABS))
+  const tabs = computed(() => Object.values(FEATURED_PRODUCTS_TABS))
 
-  const handleClick = (tab: TABS) => {
+  const handleClick = (tab: FEATURED_PRODUCTS_TABS) => {
     emit('update:modelValue', tab)
   }
 </script>

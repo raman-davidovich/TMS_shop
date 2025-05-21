@@ -2,10 +2,10 @@
   import { ref } from 'vue'
   import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
   import { useFilterProducts } from './composables/useFilterProducts'
-  import { TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
+  import { FEATURED_PRODUCTS_TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
   import FeaturedProductsTabs from './components/featured-products-tabs/FeaturedProductsTabs.vue'
 
-  const activeTab = ref<TABS>(TABS.FEATURED)
+  const activeTab = ref<FEATURED_PRODUCTS_TABS>(FEATURED_PRODUCTS_TABS.FEATURED)
 
   const filteredProducts = useFilterProducts(activeTab)
 </script>
