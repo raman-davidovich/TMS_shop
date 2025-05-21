@@ -1,11 +1,8 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
   import FeaturedProductsTab from '../featured-products-tab/FeaturedProductsTab.vue'
   import { FEATURED_PRODUCTS_TABS } from './FeaturedProductsTabs.constants'
 
   const model = defineModel<FEATURED_PRODUCTS_TABS>({ required: true })
-
-  const tabs = computed(() => Object.values(FEATURED_PRODUCTS_TABS))
 
   const handleClick = (tab: FEATURED_PRODUCTS_TABS) => {
     model.value = tab
@@ -15,7 +12,7 @@
 <template>
   <ul class="featured-products-tabs">
     <FeaturedProductsTab
-      v-for="tab in tabs"
+      v-for="tab in Object.values(FEATURED_PRODUCTS_TABS)"
       :key="tab"
       :title="tab"
       :isActive="model === tab"
