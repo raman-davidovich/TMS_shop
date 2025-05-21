@@ -116,14 +116,14 @@
     }
 
     &__like-icon {
-      fill: colors.$primaryFontColor;
+      color: colors.$primaryFontColor;
       height: 20px;
       transition: fill 0.3s ease;
       width: 20px;
 
       &_active,
       &:hover {
-        fill: colors.$accentElementColor;
+        color: colors.$accentElementColor;
       }
 
       &_animate {
