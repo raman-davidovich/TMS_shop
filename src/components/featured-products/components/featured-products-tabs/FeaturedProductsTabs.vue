@@ -3,16 +3,12 @@
   import FeaturedProductsTab from '../featured-products-tab/FeaturedProductsTab.vue'
   import { FEATURED_PRODUCTS_TABS } from './FeaturedProductsTabs.constants'
 
-  defineProps<{
-    modelValue: FEATURED_PRODUCTS_TABS
-  }>()
-
-  const emit = defineEmits(['update:modelValue'])
+  const model = defineModel<FEATURED_PRODUCTS_TABS>({ required: true })
 
   const tabs = computed(() => Object.values(FEATURED_PRODUCTS_TABS))
 
   const handleClick = (tab: FEATURED_PRODUCTS_TABS) => {
-    emit('update:modelValue', tab)
+    model.value = tab
   }
 </script>
 
@@ -22,7 +18,7 @@
       v-for="tab in tabs"
       :key="tab"
       :title="tab"
-      :isActive="modelValue === tab"
+      :isActive="model === tab"
       @click="handleClick(tab)"
     />
   </ul>
