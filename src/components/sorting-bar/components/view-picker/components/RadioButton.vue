@@ -17,7 +17,7 @@
       :value="view"
       :checked="viewType === view"
       @change="viewType = view"
-      hidden
+      class="radio-button__input"
     />
     <slot />
   </label>
@@ -27,12 +27,30 @@
   @use '@/styles/colors.scss' as colors;
 
   .radio-button {
+    display: block;
+    position: relative;
+
+    &:has(:focus-visible) {
+      box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
+    }
+
     &[data-selected='true'] {
       background-color: colors.$activeBgColor;
 
       :deep(svg) * {
         stroke: colors.$accentElementColor;
       }
+    }
+
+    &__input {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
     }
   }
 </style>
