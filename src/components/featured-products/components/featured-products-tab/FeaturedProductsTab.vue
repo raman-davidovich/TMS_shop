@@ -11,7 +11,11 @@
 
 <template>
   <li :class="{ active }">
-    <button class="featured-products-tab" :class="{ 'featured-products-tab_active': active }" @click="$emit('click')">
+    <button
+      class="featured-products-tab"
+      :class="{ 'featured-products-tab_active': active }"
+      @click="$emit('click')"
+    >
       {{ title }}
     </button>
   </li>
