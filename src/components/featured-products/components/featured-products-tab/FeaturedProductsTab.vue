@@ -11,11 +11,7 @@
 
 <template>
   <li :class="['featured-products-tab', { 'featured-products-tab_active': isActive }]">
-    <button
-      class="featured-products-tab__button"
-      :class="{ 'featured-products-tab__button_active': isActive }"
-      @click="$emit('click')"
-    >
+    <button class="featured-products-tab__button" @click="$emit('click')">
       {{ title }}
     </button>
   </li>
@@ -26,10 +22,12 @@
   @use '@styles/spacing.scss' as spacing;
 
   .featured-products-tab {
+    $root: &;
+
     list-style: none;
     transition: transform 0.3s ease;
 
-    &:hover:not(.featured-products-tab_active) {
+    &:hover:not(#{$root}_active) {
       transform: translateY(-5px);
     }
 
@@ -50,7 +48,18 @@
         margin: 18px 0;
       }
 
-      &_active {
+      &:hover,
+      &:focus-within {
+        color: colors.$accentElementColor;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    &_active {
+      #{$root}__button {
         color: colors.$accentElementColor;
         cursor: default;
 
@@ -64,15 +73,6 @@
           transform: translateX(-50%);
           width: 40%;
         }
-      }
-
-      &:hover,
-      &:focus-within {
-        color: colors.$accentElementColor;
-      }
-
-      &:focus-visible {
-        outline: none;
       }
     }
   }
