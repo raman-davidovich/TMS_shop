@@ -22,7 +22,7 @@
       v-for="tab in tabs"
       :key="tab"
       :title="tab"
-      :active="modelValue === tab"
+      :isActive="modelValue === tab"
       @click="handleClick(tab)"
     />
   </ul>
@@ -35,14 +35,5 @@
     justify-content: center;
     margin: 0 0 10px;
     padding: 0;
-
-    li {
-      list-style: none;
-      transition: transform 0.3s ease;
-
-      &:hover:not(.active) {
-        transform: translateY(-5px);
-      }
-    }
   }
 </style>

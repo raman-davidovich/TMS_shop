@@ -3,17 +3,17 @@
 
   defineProps<{
     title: TABS
-    active?: boolean
+    isActive?: boolean
   }>()
 
   defineEmits(['click'])
 </script>
 
 <template>
-  <li :class="{ active }">
+  <li :class="['featured-products-tab', { 'featured-products-tab_active': isActive }]">
     <button
-      class="featured-products-tab"
-      :class="{ 'featured-products-tab_active': active }"
+      class="featured-products-tab__button"
+      :class="{ 'featured-products-tab__button_active': isActive }"
       @click="$emit('click')"
     >
       {{ title }}
@@ -26,44 +26,54 @@
   @use '@styles/spacing.scss' as spacing;
 
   .featured-products-tab {
-    background: none;
-    border: none;
-    color: colors.$tertiaryFontColor;
-    cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    line-height: 2em;
-    padding: 0 18px;
-    position: relative;
-    transition: all 0.3s ease;
+    list-style: none;
+    transition: transform 0.3s ease;
 
-    @include spacing.phone {
-      margin: 18px 0;
+    &:hover:not(.featured-products-tab_active) {
+      transform: translateY(-5px);
     }
 
-    &_active {
-      color: colors.$accentElementColor;
+    &__button {
+      background: none;
+      border: none;
+      color: colors.$tertiaryFontColor;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      line-height: 2em;
+      padding: 0 18px;
+      position: relative;
+      transition: all 0.3s ease;
 
-      &::after {
-        background: colors.$accentElementColor;
-        bottom: -10px;
-        content: '';
-        height: 2px;
-        left: 50%;
-        position: absolute;
-        transform: translateX(-50%);
-        width: 40%;
+      @include spacing.phone {
+        margin: 18px 0;
       }
-    }
 
-    &:hover,
-    &:focus-within {
-      color: colors.$accentElementColor;
-    }
+      &_active {
+        color: colors.$accentElementColor;
+        cursor: default;
 
-    &:focus-visible {
-      outline: none;
+        &::after {
+          background: colors.$accentElementColor;
+          bottom: -10px;
+          content: '';
+          height: 2px;
+          left: 50%;
+          position: absolute;
+          transform: translateX(-50%);
+          width: 40%;
+        }
+      }
+
+      &:hover,
+      &:focus-within {
+        color: colors.$accentElementColor;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
     }
   }
 </style>
