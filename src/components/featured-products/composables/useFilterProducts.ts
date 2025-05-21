@@ -9,7 +9,7 @@ export const useFilterProducts = (activeTab: Ref<FEATURED_PRODUCTS_TABS>) => {
 
     switch (activeTab.value) {
       case FEATURED_PRODUCTS_TABS.FEATURED:
-        return products.filter((product) => product.featured === true)
+        return products.filter((product) => product.featured)
       case FEATURED_PRODUCTS_TABS.NEW:
         return products.sort((a, b) => b.createdAt.getDate() - a.createdAt.getDate())
       case FEATURED_PRODUCTS_TABS.POPULAR:
