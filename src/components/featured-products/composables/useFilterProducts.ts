@@ -1,20 +1,23 @@
+import { computed } from 'vue'
 import type { FirebaseProductType } from '../../shared/app-product-card/AppProductCard.types'
-import { TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
+import { FEATURED_PRODUCTS_TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
 
 export const useFilterProducts = (
-  activeTab: TABS,
+  activeTab: FEATURED_PRODUCTS_TABS,
   dbProducts: FirebaseProductType[]
-): FirebaseProductType[] => {
-  const products = [...dbProducts].filter((product) => product.isFeatured === true)
+) => {
+  return computed(() => {
+    const products = [...dbProducts].filter((product) => product.isFeatured)
 
-  switch (activeTab) {
-    case TABS.FEATURED:
-      return products.filter((product) => product.isFeatured === true)
-    case TABS.NEW:
-      return products.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
-    case TABS.POPULAR:
-      return products.sort((a, b) => b.numberOfSales - a.numberOfSales)
-    default:
-      return products
-  }
+    switch (activeTab) {
+      case FEATURED_PRODUCTS_TABS.FEATURED:
+        return products.filter((product) => product.isFeatured)
+      case FEATURED_PRODUCTS_TABS.NEW:
+        return products.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
+      case FEATURED_PRODUCTS_TABS.POPULAR:
+        return products.sort((a, b) => b.numberOfSales - a.numberOfSales)
+      default:
+        return products
+    }
+  })
 }

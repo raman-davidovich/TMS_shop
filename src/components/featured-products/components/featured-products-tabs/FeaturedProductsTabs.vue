@@ -1,28 +1,21 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
   import FeaturedProductsTab from '../featured-products-tab/FeaturedProductsTab.vue'
-  import { TABS } from './FeaturedProductsTabs.constants'
+  import { FEATURED_PRODUCTS_TABS } from './FeaturedProductsTabs.constants'
 
-  defineProps<{
-    modelValue: TABS
-  }>()
+  const model = defineModel<FEATURED_PRODUCTS_TABS>({ required: true })
 
-  const emit = defineEmits(['update:modelValue'])
-
-  const tabs = computed(() => Object.values(TABS))
-
-  const handleClick = (tab: TABS) => {
-    emit('update:modelValue', tab)
+  const handleClick = (tab: FEATURED_PRODUCTS_TABS) => {
+    model.value = tab
   }
 </script>
 
 <template>
   <ul class="featured-products-tabs">
     <FeaturedProductsTab
-      v-for="tab in tabs"
+      v-for="tab in Object.values(FEATURED_PRODUCTS_TABS)"
       :key="tab"
       :title="tab"
-      :active="modelValue === tab"
+      :isActive="model === tab"
       @click="handleClick(tab)"
     />
   </ul>
@@ -35,14 +28,5 @@
     justify-content: center;
     margin: 0 0 10px;
     padding: 0;
-
-    li {
-      list-style: none;
-      transition: transform 0.3s ease;
-
-      &:hover:not(.active) {
-        transform: translateY(-5px);
-      }
-    }
   }
 </style>

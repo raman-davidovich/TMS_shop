@@ -1,5 +1,9 @@
 {
-  "extends": ["stylelint-config-standard-scss", "stylelint-config-recommended-vue", "stylelint-config-recess-order"],
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-recommended-vue",
+    "stylelint-config-recess-order"
+  ],
   "customSyntax": "postcss-html",
   "plugins": ["stylelint-scss", "stylelint-order"],
   "rules": {
@@ -52,7 +56,8 @@
     },
     "scss/operator-no-unspaced": true,
     "scss/double-slash-comment-whitespace-inside": "always",
-    "scss/declaration-nested-properties": "never"
+    "scss/declaration-nested-properties": "never",
+    "selector-class-pattern": null
   },
   "overrides": [
     {
