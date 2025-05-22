@@ -16,7 +16,7 @@
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
-    <div v-if="productStore.isLoading">Loading products...</div>
+    <div v-if="productStore.isLoading">Loading featured products...</div>
     <TransitionGroup name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"
