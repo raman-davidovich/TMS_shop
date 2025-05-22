@@ -54,6 +54,7 @@
       }
 
       &:focus-visible {
+        box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
         outline: none;
       }
     }
