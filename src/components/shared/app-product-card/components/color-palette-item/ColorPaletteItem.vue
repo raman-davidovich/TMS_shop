@@ -7,7 +7,10 @@
 </script>
 
 <template>
-  <li class="color-palette-item" :class="`color-palette-item_background-color_${backgroundColor}`"></li>
+  <li
+    class="color-palette-item"
+    :class="`color-palette-item_background-color_${backgroundColor}`"
+  ></li>
 </template>
 
 <style scoped lang="scss">

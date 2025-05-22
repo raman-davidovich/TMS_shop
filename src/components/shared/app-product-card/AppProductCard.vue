@@ -156,14 +156,14 @@
     }
 
     &__like-icon {
-      fill: colors.$primaryFontColor;
+      color: colors.$primaryFontColor;
       height: 20px;
       transition: fill 0.3s ease;
       width: 20px;
 
       &_active,
       &:hover {
-        fill: colors.$accentElementColor;
+        color: colors.$accentElementColor;
       }
 
       &_animate {
@@ -173,8 +173,12 @@
 
     &__title {
       color: colors.$secondaryFontColor;
-      margin: 0;
+      margin: 0 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
       transition: color 0.3s ease;
+      white-space: nowrap;
+      width: calc(100% - 16px); // take into account horizontal margin
 
       &_featured {
         font-size: 1.25em;
@@ -200,6 +204,7 @@
       font-weight: 500;
       letter-spacing: 0.2px;
       margin: 0;
+      margin-left: 8px;
       transition: all 0.3s ease;
 
       &_featured {
@@ -214,9 +219,13 @@
     }
 
     &__color-palette {
+      align-items: center;
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      padding: 0;
+      justify-content: flex-start;
+      max-width: 100%;
+      padding: 0 8px;
     }
 
     &__color-item {
@@ -230,6 +239,7 @@
     &__sizes-list {
       display: flex;
       gap: 11px;
+      margin: 0 0 8px 8px;
       padding: 0;
     }
 

@@ -8,7 +8,7 @@ interface MenuManagementReturn {
 }
 
 export const useMenuManagement = (): MenuManagementReturn => {
-  const isMenuOpen: Ref<boolean> = ref(false)
+  const isMenuOpen = ref<boolean>(false)
 
   const toggleMenu = (): boolean => (isMenuOpen.value = !isMenuOpen.value)
 
