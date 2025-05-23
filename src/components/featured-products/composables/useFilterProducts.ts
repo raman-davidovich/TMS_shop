@@ -4,10 +4,10 @@ import { FEATURED_PRODUCTS_TABS } from '../components/featured-products-tabs/Fea
 
 export const useFilterProducts = (
   activeTab: Ref<FEATURED_PRODUCTS_TABS>,
-  dbProducts: FirebaseProductType[]
+  getDbProducts: () => FirebaseProductType[]
 ) => {
   return computed(() => {
-    const products = [...dbProducts]
+    const products = [...getDbProducts()]
 
     switch (activeTab.value) {
       case FEATURED_PRODUCTS_TABS.FEATURED:

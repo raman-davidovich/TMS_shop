@@ -10,7 +10,7 @@
   const productStore = useProductStore()
   const activeTab = ref<FEATURED_PRODUCTS_TABS>(FEATURED_PRODUCTS_TABS.FEATURED)
 
-  const filteredProducts = useFilterProducts(activeTab, productStore.featuredProducts)
+  const filteredProducts = useFilterProducts(activeTab, () => productStore.featuredProducts)
 </script>
 
 <template>
