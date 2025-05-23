@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
-  import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
+  import { CARD_TYPES } from '../../../../components/shared/app-product-card/AppProductCard.types'
+  import AppProductCard from '../../../../components/shared/app-product-card/AppProductCard.vue'
   import { useProductStore } from '@/stores/productStore'
-  import { ProductType } from '../shared/app-product-card/AppProductCard.types'
+  import { ProductType } from '../../../../components/shared/app-product-card/AppProductCard.types'
 
   const productStore = useProductStore()
 

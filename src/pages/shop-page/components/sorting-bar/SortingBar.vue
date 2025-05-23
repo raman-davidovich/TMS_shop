@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { defineModel } from 'vue'
   import type { SortOption } from '@/stores/productStore.types'
-  import type { ViewType } from '@/components/product-list/ProductList.types'
+  import type { ViewType } from '@/pages/shop-page/components/product-list/ProductList.types'
   import SelectGroup from './components/select-group/SelectGroup.vue'
   import ViewPicker from './components/view-picker/ViewPicker.vue'
 

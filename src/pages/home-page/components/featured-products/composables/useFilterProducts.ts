@@ -1,5 +1,5 @@
 import { computed, type Ref } from 'vue'
-import type { ProductType } from '../../shared/app-product-card/AppProductCard.types'
+import type { ProductType } from '../../../../../components/shared/app-product-card/AppProductCard.types'
 import { FEATURED_PRODUCTS_TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
 
 export const useFilterProducts = (

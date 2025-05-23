@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { defineModel } from 'vue'
-  import type { ViewType } from '@/components/product-list/ProductList.types'
+  import type { ViewType } from '@/pages/shop-page/components/product-list/ProductList.types'
   import RadioButton from './components/RadioButton.vue'
   import { VIEW_PICKER_OPTIONS } from './ViewPicker.constants'
 

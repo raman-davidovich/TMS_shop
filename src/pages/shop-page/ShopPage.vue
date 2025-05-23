@@ -1,11 +1,11 @@
 <script setup lang="ts">
   import AppHero from '@/components/app-hero/AppHero.vue'
   import { APP_HERO_IMAGES } from '@/components/app-hero/AppHero.constants'
-  import ProductList from '@/components/product-list/ProductList.vue'
-  import SortingBar from '@/components/sorting-bar/SortingBar.vue'
+  import ProductList from '@/pages/shop-page/components/product-list/ProductList.vue'
+  import SortingBar from '@/pages/shop-page/components/sorting-bar/SortingBar.vue'
   import { ref, type Ref } from 'vue'
   import type { SortOption } from '@/stores/productStore.types'
-  import type { ViewType } from '@/components/product-list/ProductList.types'
+  import type { ViewType } from '@/pages/shop-page/components/product-list/ProductList.types'
 
   const selectedSort: Ref<SortOption> = ref('popularity')
   const viewType: Ref<ViewType> = ref('grid')

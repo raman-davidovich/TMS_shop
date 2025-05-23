@@ -2,9 +2,9 @@
   import AppHero from '@/components/app-hero/AppHero.vue'
   import { APP_HERO_IMAGES } from '@/components/app-hero/AppHero.constants'
   import SectionWrapper from '@/components/shared/section-wrapper/SectionWrapper.vue'
-  import ProductGallery from '@/components/product-gallery/ProductGallery.vue'
-  import FeaturedProducts from '@/components/featured-products/FeaturedProducts.vue'
-  import LatestProducts from '@/components/latest-products/LatestProducts.vue'
+  import ProductGallery from '@/pages/home-page/components/product-gallery/ProductGallery.vue'
+  import FeaturedProducts from '@/pages/home-page/components/featured-products/FeaturedProducts.vue'
+  import LatestProducts from './components/latest-products/LatestProducts.vue'
 </script>
 
 <template>

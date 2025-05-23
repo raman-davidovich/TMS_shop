@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
+  import AppProductCard from '../../../../components/shared/app-product-card/AppProductCard.vue'
   import { useFilterProducts } from './composables/useFilterProducts'
   import { FEATURED_PRODUCTS_TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
   import FeaturedProductsTabs from './components/featured-products-tabs/FeaturedProductsTabs.vue'
-  import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
+  import { CARD_TYPES } from '../../../../components/shared/app-product-card/AppProductCard.types'
   import { useProductStore } from '@/stores/productStore'
 
   const productStore = useProductStore()
