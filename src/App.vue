@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { onMounted } from 'vue'
   import AppHeader from './components/app-header/AppHeader.vue'
   import AppFooter from './components/app-footer/AppFooter.vue'
   import { RouterView } from 'vue-router'
@@ -9,11 +8,10 @@
   const productStore = useProductStore()
   const favoriteStore = useFavoriteStore()
 
-  favoriteStore.initFromStorage()
-
-  onMounted(() => {
-    productStore.fetchProducts()
-  })
+  ;(async () => {
+    favoriteStore.initFromStorage()
+    await productStore.fetchProducts()
+  })()
 </script>
 
 <template>
