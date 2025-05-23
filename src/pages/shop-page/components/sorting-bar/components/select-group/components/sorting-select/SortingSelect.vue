@@ -2,7 +2,6 @@
   import { SORT_OPTIONS } from '../../../../SortingBar.constants'
   import type { SortOption } from '@/stores/productStore.types'
   import ArrowsIcon from './components/ArrowsIcon.vue'
-  import { defineModel } from 'vue'
 
   const sortByModel = defineModel<SortOption>('sortBy', { required: true })
 </script>

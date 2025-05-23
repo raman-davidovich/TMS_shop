@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { SortOption } from '@/stores/productStore.types'
   import SortingSelect from './components/sorting-select/SortingSelect.vue'
-  import { defineModel } from 'vue'
 
   const sortBy = defineModel<SortOption>('sortBy', { required: true })
 </script>
