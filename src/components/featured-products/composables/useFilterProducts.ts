@@ -1,17 +1,17 @@
-import { computed } from 'vue'
+import { computed, type Ref } from 'vue'
 import type { FirebaseProductType } from '../../shared/app-product-card/AppProductCard.types'
 import { FEATURED_PRODUCTS_TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
 
 export const useFilterProducts = (
-  activeTab: FEATURED_PRODUCTS_TABS,
+  activeTab: Ref<FEATURED_PRODUCTS_TABS>,
   dbProducts: FirebaseProductType[]
 ) => {
   return computed(() => {
-    const products = [...dbProducts].filter((product) => product.isFeatured)
+    const products = [...dbProducts]
 
-    switch (activeTab) {
+    switch (activeTab.value) {
       case FEATURED_PRODUCTS_TABS.FEATURED:
-        return products.filter((product) => product.isFeatured)
+        return products
       case FEATURED_PRODUCTS_TABS.NEW:
         return products.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
       case FEATURED_PRODUCTS_TABS.POPULAR:

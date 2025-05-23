@@ -10,13 +10,15 @@
   const productStore = useProductStore()
   const activeTab = ref<FEATURED_PRODUCTS_TABS>(FEATURED_PRODUCTS_TABS.FEATURED)
 
-  const filteredProducts = useFilterProducts(activeTab.value, productStore.featuredProducts)
+  const filteredProducts = useFilterProducts(activeTab, productStore.featuredProducts)
 </script>
 
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
-    <div v-if="productStore.isLoading">Loading featured products...</div>
+    <div v-if="productStore.isLoading" class="featured-products__message">
+      Loading featured products...
+    </div>
     <TransitionGroup name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"
@@ -39,6 +41,10 @@
 
     @include spacing.phone {
       gap: 30px;
+    }
+
+    &__message {
+      align-self: center;
     }
 
     &__product-list {
