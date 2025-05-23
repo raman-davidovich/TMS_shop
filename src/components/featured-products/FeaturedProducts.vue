@@ -1,24 +1,24 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
+  import { ref } from 'vue'
   import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
   import { useFilterProducts } from './composables/useFilterProducts'
-  import { TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
+  import { FEATURED_PRODUCTS_TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
   import FeaturedProductsTabs from './components/featured-products-tabs/FeaturedProductsTabs.vue'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
   import { useProductStore } from '@/stores/productStore'
 
   const productStore = useProductStore()
-  const activeTab = ref<TABS>(TABS.FEATURED)
+  const activeTab = ref<FEATURED_PRODUCTS_TABS>(FEATURED_PRODUCTS_TABS.FEATURED)
 
-  const filteredProducts = computed<ReturnType<typeof useFilterProducts>>(() =>
-    useFilterProducts(activeTab.value, productStore.featuredProducts)
-  )
+  const filteredProducts = useFilterProducts(activeTab, () => productStore.featuredProducts)
 </script>
 
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
-    <div v-if="productStore.isLoading" class="featured-products__message">Loading products...</div>
+    <div v-if="productStore.isLoading" class="featured-products__message">
+      Loading featured products...
+    </div>
     <TransitionGroup v-else name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"

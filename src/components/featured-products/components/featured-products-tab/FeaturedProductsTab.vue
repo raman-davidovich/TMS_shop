@@ -1,17 +1,17 @@
 <script setup lang="ts">
-  import { TABS } from '../featured-products-tabs/FeaturedProductsTabs.constants'
+  import { FEATURED_PRODUCTS_TABS } from '../featured-products-tabs/FeaturedProductsTabs.constants'
 
   defineProps<{
-    title: TABS
-    active?: boolean
+    title: FEATURED_PRODUCTS_TABS
+    isActive?: boolean
   }>()
 
   defineEmits(['click'])
 </script>
 
 <template>
-  <li :class="{ active }">
-    <button class="featured-products-tab" :class="{ 'featured-products-tab_active': active }" @click="$emit('click')">
+  <li :class="['featured-products-tab', { 'featured-products-tab_active': isActive }]">
+    <button class="featured-products-tab__button" @click="$emit('click')">
       {{ title }}
     </button>
   </li>
@@ -22,44 +22,59 @@
   @use '@styles/spacing.scss' as spacing;
 
   .featured-products-tab {
-    background: none;
-    border: none;
-    color: colors.$tertiaryFontColor;
-    cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    line-height: 2em;
-    padding: 0 18px;
-    position: relative;
-    transition: all 0.3s ease;
+    $root: &;
 
-    @include spacing.phone {
-      margin: 18px 0;
+    list-style: none;
+    transition: transform 0.3s ease;
+
+    &:hover:not(#{$root}_active) {
+      transform: translateY(-5px);
     }
 
-    &_active {
-      color: colors.$accentElementColor;
+    &__button {
+      background: none;
+      border: none;
+      color: colors.$tertiaryFontColor;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      line-height: 2em;
+      padding: 0 18px;
+      position: relative;
+      transition: all 0.3s ease;
 
-      &::after {
-        background: colors.$accentElementColor;
-        bottom: -10px;
-        content: '';
-        height: 2px;
-        left: 50%;
-        position: absolute;
-        transform: translateX(-50%);
-        width: 40%;
+      @include spacing.phone {
+        margin: 18px 0;
+      }
+
+      &:hover,
+      &:focus-within {
+        color: colors.$accentElementColor;
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
+        outline: none;
       }
     }
 
-    &:hover,
-    &:focus-within {
-      color: colors.$accentElementColor;
-    }
+    &_active {
+      #{$root}__button {
+        color: colors.$accentElementColor;
+        cursor: default;
 
-    &:focus-visible {
-      outline: none;
+        &::after {
+          background: colors.$accentElementColor;
+          bottom: -10px;
+          content: '';
+          height: 2px;
+          left: 50%;
+          position: absolute;
+          transform: translateX(-50%);
+          width: 40%;
+        }
+      }
     }
   }
 </style>

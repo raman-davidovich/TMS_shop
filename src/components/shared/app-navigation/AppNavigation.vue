@@ -64,8 +64,7 @@
         width: 0;
       }
 
-      &:hover,
-      &:focus-within {
+      &:hover {
         color: colors.$accentElementColor;
 
         &:not(:has(.router-link-active))::after {
@@ -98,6 +97,8 @@
       transition: transform 0.2s ease;
 
       &:focus-visible {
+        box-shadow: 0 0 0 4px rgba(colors.$accentElementColor, 0.8);
+        color: colors.$accentElementColor;
         outline: none;
         transform: scale(1.05);
       }
