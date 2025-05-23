@@ -6,7 +6,7 @@ interface MobileDetectionReturn {
 }
 
 export const useMobileDetection = (): MobileDetectionReturn => {
-  const isMobile: Ref<boolean> = ref(false)
+  const isMobile = ref<boolean>(false)
 
   const checkScreenSize = (): void => {
     isMobile.value = window.innerWidth < SCREEN_BREAKPOINTS.LG

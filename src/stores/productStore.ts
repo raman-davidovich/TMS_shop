@@ -12,7 +12,7 @@ export const useProductStore = defineStore('product', {
   }),
 
   getters: {
-    featuredProducts: (state) => state.products.filter((product) => product.isFeatured === true),
+    featuredProducts: (state) => state.products.filter((product) => product.isFeatured),
     latestProducts: (state) =>
       state.products.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds).slice(0, 8)
   },
