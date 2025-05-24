@@ -13,6 +13,11 @@ export enum PRODUCT_SIZES {
   XS = 'XS'
 }
 
+export enum CARD_TYPES {
+  FEATURED = 'featured',
+  LATEST = 'latest'
+}
+
 type ProductColorType = (typeof PRODUCT_COLORS)[keyof typeof PRODUCT_COLORS]
 type ProductSizeType = (typeof PRODUCT_SIZES)[keyof typeof PRODUCT_SIZES]
 export type ProductPrice = { dollars: number; cents: number }
