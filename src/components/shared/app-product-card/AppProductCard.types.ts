@@ -33,3 +33,8 @@ export type ProductType = {
   createdAt: { seconds: number; nanoseconds: number }
   numberOfSales: number
 }
+
+export type ProductInfoType = Omit<
+  ProductType,
+  'id' | 'image' | 'price' | 'isFeatured' | 'createdAt' | 'numberOfSales'
+>

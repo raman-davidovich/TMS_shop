@@ -1,10 +1,9 @@
 <script setup lang="ts">
-  import { ProductType, CARD_TYPES } from '../../shared/app-product-card/AppProductCard.types'
-  import SizeItem from './components/size-item/SizeItem.vue'
-  import ColorPaletteItem from './components/color-palette-item/ColorPaletteItem.vue'
+  import { ProductType, CARD_TYPES } from './AppProductCard.types'
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
   import { useFavoriteStore } from '@/stores/favoriteStore/favoriteStore'
+  import ProductInfo from './components/product-info/ProductInfo.vue'
 
   const { id, image, name, baseColor, price, availableColors, availableSizes, cardType } =
     defineProps<ProductType & { cardType?: CARD_TYPES }>()
@@ -40,70 +39,14 @@
         }"
       />
     </button>
-    <template v-if="cardType !== CARD_TYPES.LONG">
-      <h3
-        class="app-product-card__title"
-        :class="[`app-product-card__title_${cardType}`]"
-        :title="name"
-      >
-        {{ name }}
-        <br />
-        <span class="app-product-card__title_color_tertiary">({{ baseColor }})</span>
-      </h3>
-      <h4 class="app-product-card__price" :class="[`app-product-card__price_${cardType}`]">
-        {{ formattedPrice }}
-      </h4>
-      <ul v-if="cardType !== CARD_TYPES.LATEST" class="app-product-card__color-palette">
-        <ColorPaletteItem
-          v-for="color in availableColors"
-          :key="color"
-          :backgroundColor="color"
-          class="app-product-card__color-item"
-        />
-      </ul>
-      <ul class="app-product-card__sizes-list">
-        <SizeItem
-          v-for="size in availableSizes"
-          :key="size"
-          :size-title="size"
-          class="app-product-card__size-item"
-        />
-      </ul>
-    </template>
-    <template v-else>
-      <div class="app-product-card__wrapper">
-        <h3
-          class="app-product-card__title"
-          :class="[`app-product-card__title_${cardType}`]"
-          :title="name"
-        >
-          {{ name }}
-          <span class="app-product-card__title_color_tertiary">({{ baseColor }})</span>
-        </h3>
-        <h4 class="app-product-card__price" :class="[`app-product-card__price_${cardType}`]">
-          {{ formattedPrice }}
-        </h4>
-        <ul
-          class="app-product-card__color-palette"
-          :class="[`app-product-card__color-palette_${cardType}`]"
-        >
-          <ColorPaletteItem
-            v-for="color in availableColors"
-            :key="color"
-            :backgroundColor="color"
-            class="app-product-card__color-item"
-          />
-        </ul>
-        <ul class="app-product-card__sizes-list">
-          <SizeItem
-            v-for="size in availableSizes"
-            :key="size"
-            :size-title="size"
-            class="app-product-card__size-item"
-          />
-        </ul>
-      </div>
-    </template>
+    <ProductInfo
+      :name="name"
+      :baseColor="baseColor"
+      :availableColors="availableColors"
+      :availableSizes="availableSizes"
+      :cardType="cardType"
+      :price="formattedPrice"
+    />
   </li>
 </template>
 
@@ -113,6 +56,9 @@
 
   .app-product-card {
     $self: &;
+
+    --title-color: #{colors.$secondaryFontColor};
+    --price-color: #{colors.$secondaryFontColor};
 
     cursor: pointer;
     display: flex;
@@ -154,13 +100,8 @@
       box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
       transform: translateY(-5px);
 
-      #{$self}__title {
-        color: colors.$accentElementColor;
-      }
-
-      #{$self}__price {
-        color: colors.$accentElementColor;
-      }
+      --title-color: #{colors.$accentElementColor};
+      --price-color: #{colors.$accentElementColor};
 
       #{$self}__image {
         transform: scale(1.03);
@@ -238,104 +179,6 @@
 
       &_animate {
         animation: heart-beat 0.4s ease;
-      }
-    }
-
-    &__title {
-      color: colors.$secondaryFontColor;
-      margin: 0 8px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: color 0.3s ease;
-      white-space: nowrap;
-      width: calc(100% - 16px); // take into account horizontal margins
-
-      &_featured {
-        font-size: 1.25em;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-        line-height: 1.5em;
-      }
-
-      &_latest {
-        font-size: 1em;
-        font-weight: 700;
-        letter-spacing: 0.1px;
-        line-height: 1.5em;
-      }
-
-      &_long {
-        font-size: 1em;
-        letter-spacing: 0.1px;
-        line-height: 1.5em;
-        margin-bottom: 11px;
-        margin-top: 19px;
-      }
-
-      &_color_tertiary {
-        color: colors.$tertiaryFontColor;
-      }
-    }
-
-    &__price {
-      color: colors.$secondaryFontColor;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      margin: 0;
-      margin-left: 8px;
-      transition: all 0.3s ease;
-
-      &_featured {
-        font-size: 1.5em;
-        line-height: 1.6em;
-      }
-
-      &_latest {
-        font-size: 1em;
-        line-height: 1.75em;
-      }
-
-      &_long {
-        font-size: 1em;
-        line-height: 1.75em;
-        margin-bottom: 26px;
-      }
-    }
-
-    &__color-palette {
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-start;
-      max-width: 100%;
-      padding: 0 8px;
-
-      &_long {
-        margin-bottom: 17px;
-      }
-    }
-
-    &__color-item {
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: translateX(3px);
-      }
-    }
-
-    &__sizes-list {
-      display: flex;
-      gap: 11px;
-      margin: 0 0 8px 8px;
-      padding: 0;
-    }
-
-    &__size-item {
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: translateX(3px);
       }
     }
   }
