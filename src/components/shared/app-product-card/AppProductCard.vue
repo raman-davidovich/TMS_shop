@@ -20,12 +20,7 @@
 
 <template>
   <li class="app-product-card" :class="[`app-product-card_${cardType}`]">
-    <img
-      :src="image"
-      :alt="name"
-      class="app-product-card__image"
-      :class="[`app-product-card__image_${cardType}`]"
-    />
+    <img :src="image" :alt="name" class="app-product-card__image" />
     <button
       class="app-product-card__like-button"
       @click="handleLikeClick"
@@ -71,6 +66,12 @@
       border-radius: 0 0 10px 10px;
       gap: 14px;
       width: 242px;
+
+      #{$self}__image {
+        border-radius: 10px;
+        height: 414px;
+        width: 242px;
+      }
     }
 
     &_latest {
@@ -84,6 +85,18 @@
           display: none;
         }
       }
+
+      #{$self}__image {
+        background-size: contain;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+        width: 240px;
+
+        @include spacing.phone {
+          width: 320px;
+        }
+      }
     }
 
     &_long {
@@ -94,6 +107,14 @@
       gap: 37px;
       padding: 20px 0 25px 22.5px;
       width: 100%;
+
+      #{$self}__image {
+        background-size: contain;
+        height: 192px;
+        object-fit: cover;
+        object-position: center;
+        width: 294px;
+      }
     }
 
     &:hover {
@@ -111,32 +132,6 @@
     &__image {
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform;
-
-      &_featured {
-        border-radius: 10px;
-        height: 414px;
-        width: 242px;
-      }
-
-      &_latest {
-        background-size: contain;
-        height: 180px;
-        object-fit: cover;
-        object-position: center;
-        width: 240px;
-
-        @include spacing.phone {
-          width: 320px;
-        }
-      }
-
-      &_long {
-        background-size: contain;
-        height: 192px;
-        object-fit: cover;
-        object-position: center;
-        width: 294px;
-      }
     }
 
     &__like-button {
