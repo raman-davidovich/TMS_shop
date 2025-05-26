@@ -21,12 +21,7 @@
 
 <template>
   <li class="app-product-card" :class="[`app-product-card_${cardType}`]">
-    <img
-      :src="image"
-      :alt="name"
-      class="app-product-card__image"
-      :class="[`app-product-card__image_${cardType}`]"
-    />
+    <img :src="image" :alt="name" class="app-product-card__image" />
     <button
       class="app-product-card__like-button"
       @click="handleLikeClick"
@@ -40,16 +35,12 @@
         }"
       />
     </button>
-    <h3
-      class="app-product-card__title"
-      :class="[`app-product-card__title_${cardType}`]"
-      :title="name"
-    >
+    <h3 class="app-product-card__title" :title="name">
       {{ name }}
       <br />
       <span class="app-product-card__title_color_tertiary">({{ baseColor }})</span>
     </h3>
-    <h4 class="app-product-card__price" :class="[`app-product-card__price_${cardType}`]">
+    <h4 class="app-product-card__price">
       {{ formattedPrice }}
     </h4>
     <ul v-if="cardType === CARD_TYPES.FEATURED" class="app-product-card__color-palette">
@@ -89,11 +80,52 @@
       border-radius: 0 0 10px 10px;
       gap: 14px;
       width: 242px;
+
+      #{$self}__image {
+        border-radius: 10px;
+        height: 414px;
+        width: 242px;
+      }
+
+      #{$self}__title {
+        font-size: 1.25em;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+        line-height: 1.5em;
+      }
+
+      #{$self}__price {
+        font-size: 1.5em;
+        line-height: 1.6em;
+      }
     }
 
     &_latest {
       gap: 10px;
       width: 240px;
+
+      #{$self}__image {
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+        width: 240px;
+
+        @include spacing.phone {
+          width: 320px;
+        }
+      }
+
+      #{$self}__title {
+        font-size: 1em;
+        font-weight: 700;
+        letter-spacing: 0.1px;
+        line-height: 1.5em;
+      }
+
+      #{$self}__price {
+        font-size: 1em;
+        line-height: 1.75em;
+      }
 
       @include spacing.phone {
         width: 320px;
@@ -122,26 +154,9 @@
     }
 
     &__image {
+      background-size: contain;
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform;
-
-      &_featured {
-        border-radius: 10px;
-        height: 414px;
-        width: 242px;
-      }
-
-      &_latest {
-        background-size: contain;
-        height: 180px;
-        object-fit: cover;
-        object-position: center;
-        width: 240px;
-
-        @include spacing.phone {
-          width: 320px;
-        }
-      }
     }
 
     &__like-button {
@@ -196,20 +211,6 @@
       white-space: nowrap;
       width: calc(100% - 16px); // take into account horizontal margins
 
-      &_featured {
-        font-size: 1.25em;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-        line-height: 1.5em;
-      }
-
-      &_latest {
-        font-size: 1em;
-        font-weight: 700;
-        letter-spacing: 0.1px;
-        line-height: 1.5em;
-      }
-
       &_color_tertiary {
         color: colors.$tertiaryFontColor;
       }
@@ -219,19 +220,8 @@
       color: colors.$secondaryFontColor;
       font-weight: 500;
       letter-spacing: 0.2px;
-      margin: 0;
-      margin-left: 8px;
+      margin: 0 0 0 8px;
       transition: all 0.3s ease;
-
-      &_featured {
-        font-size: 1.5em;
-        line-height: 1.6em;
-      }
-
-      &_latest {
-        font-size: 1em;
-        line-height: 1.75em;
-      }
     }
 
     &__color-palette {
