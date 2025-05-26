@@ -1,18 +1,22 @@
 <script setup lang="ts">
-  import type { FeaturedProductType } from '../../shared/app-product-card/AppProductCard.types'
+  import {
+    FeaturedProductType,
+    CARD_TYPES
+  } from '../../shared/app-product-card/AppProductCard.types'
   import SizeItem from './components/size-item/SizeItem.vue'
   import ColorPaletteItem from './components/color-palette-item/ColorPaletteItem.vue'
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
 
-  const { image, name, baseColor, price, availableColors, availableSizes } =
-    defineProps<FeaturedProductType>()
+  const { image, name, baseColor, price, availableColors, availableSizes, cardType } = defineProps<
+    FeaturedProductType & { cardType?: CARD_TYPES }
+  >()
 
   const { isLiked, shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
 </script>
 
 <template>
-  <li class="app-product-card">
+  <li class="app-product-card" :class="[`app-product-card_${cardType}`]">
     <img :src="image" :alt="name" class="app-product-card__image" />
     <button class="app-product-card__like-button" @click="toggleLike" aria-label="Add to favorites">
       <LikeIcon
@@ -28,8 +32,10 @@
       <br />
       <span class="app-product-card__title_color_tertiary">{{ baseColor }}</span>
     </h3>
-    <h4 class="app-product-card__price">{{ formattedPrice }}</h4>
-    <ul class="app-product-card__color-palette">
+    <h4 class="app-product-card__price">
+      {{ formattedPrice }}
+    </h4>
+    <ul v-if="cardType === CARD_TYPES.FEATURED" class="app-product-card__color-palette">
       <ColorPaletteItem
         v-for="color in availableColors"
         :key="color"
@@ -50,18 +56,73 @@
 
 <style scoped lang="scss">
   @use '@styles/colors.scss' as colors;
+  @use '@styles/spacing.scss' as spacing;
 
   .app-product-card {
     $self: &;
 
-    border-radius: 0 0 10px 10px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 14px;
     list-style: none;
     position: relative;
     transition: all 0.3s ease-in-out;
+
+    &_featured {
+      border-radius: 0 0 10px 10px;
+      gap: 14px;
+
+      #{$self}__image {
+        border-radius: 10px;
+        height: 414px;
+        width: 242px;
+      }
+
+      #{$self}__title {
+        font-size: 1.25em;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+        line-height: 1.5em;
+      }
+
+      #{$self}__price {
+        font-size: 1.5em;
+        line-height: 1.6em;
+      }
+    }
+
+    &_latest {
+      gap: 10px;
+
+      #{$self}__image {
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+        width: 240px;
+
+        @include spacing.phone {
+          width: 320px;
+        }
+      }
+
+      #{$self}__title {
+        font-size: 1em;
+        font-weight: 700;
+        letter-spacing: 0.1px;
+        line-height: 1.5em;
+      }
+
+      #{$self}__price {
+        font-size: 1em;
+        line-height: 1.75em;
+      }
+
+      @include spacing.phone {
+        #{$self}__sizes-list {
+          display: none;
+        }
+      }
+    }
 
     &:hover {
       box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
@@ -81,10 +142,8 @@
     }
 
     &__image {
-      border-radius: 10px;
-      height: 414px;
+      background-size: contain;
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      width: 242px;
       will-change: transform;
     }
 
@@ -133,10 +192,6 @@
 
     &__title {
       color: colors.$secondaryFontColor;
-      font-size: 1.25em;
-      font-weight: 400;
-      letter-spacing: 0.2px;
-      line-height: 1.5em;
       margin: 0 8px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -151,12 +206,9 @@
 
     &__price {
       color: colors.$secondaryFontColor;
-      font-size: 1.5em;
       font-weight: 500;
       letter-spacing: 0.2px;
-      line-height: 1.6em;
-      margin: 0;
-      margin-left: 8px;
+      margin: 0 0 0 8px;
       transition: all 0.3s ease;
     }
 
