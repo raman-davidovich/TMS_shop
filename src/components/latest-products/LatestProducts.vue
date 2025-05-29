@@ -3,7 +3,6 @@
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
   import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
   import { useProductStore } from '@/stores/productStore'
-  import { FirebaseProductType } from '../shared/app-product-card/AppProductCard.types'
 
   const productStore = useProductStore()
 
