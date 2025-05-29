@@ -18,6 +18,8 @@ export const useProductStore = defineStore('product', {
 
   actions: {
     async fetchProducts() {
+      this.error = null
+
       if (this.products.length > 0) return
 
       try {
