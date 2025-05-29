@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { onMounted } from 'vue'
   import AppHeader from './components/app-header/AppHeader.vue'
   import AppFooter from './components/app-footer/AppFooter.vue'
   import { RouterView } from 'vue-router'
@@ -7,9 +6,9 @@
 
   const productStore = useProductStore()
 
-  onMounted(() => {
-    productStore.fetchProducts()
-  })
+  ;(async () => {
+    await productStore.fetchProducts()
+  })()
 </script>
 
 <template>
