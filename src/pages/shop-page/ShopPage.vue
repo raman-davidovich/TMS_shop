@@ -3,20 +3,68 @@
   import { APP_HERO_IMAGES } from '@/components/app-hero/AppHero.constants'
   import ProductList from '@/pages/shop-page/components/product-list/ProductList.vue'
   import SortingBar from '@/pages/shop-page/components/sorting-bar/SortingBar.vue'
-  import { ref, type Ref } from 'vue'
+  import { ref, watch, computed, onMounted, provide } from 'vue'
   import type { SortOption } from '@/stores/productStore.types'
   import type { ViewType } from '@/pages/shop-page/components/product-list/ProductList.types'
+  import { PRODUCT_LIST_ITEMS_NUMBER } from './components/product-list/ProductList.constants'
 
-  const selectedSort: Ref<SortOption> = ref('popularity')
-  const viewType: Ref<ViewType> = ref('grid')
+  const initialSort = (): SortOption => {
+    const savedSort = localStorage.getItem('selectedSort')
+    return (savedSort as SortOption) || 'popularity'
+  }
+
+  const initialViewType = (): ViewType => {
+    const savedView = localStorage.getItem('viewType')
+    return (savedView as ViewType) || 'grid'
+  }
+
+  const selectedSort = ref<SortOption>(initialSort())
+  const viewType = ref<ViewType>(initialViewType())
+  const currentPage = ref<number>(1)
+  const pageSize = computed<number>(() =>
+    viewType.value === 'grid' ? PRODUCT_LIST_ITEMS_NUMBER.GRID : PRODUCT_LIST_ITEMS_NUMBER.LIST
+  )
+
+  const mainBlockRef = ref<HTMLElement | null>(null)
+  provide('mainBlockRef', mainBlockRef)
+
+  watch([selectedSort, viewType], () => {
+    currentPage.value = 1
+  })
+
+  watch(currentPage, (newPage) => {
+    localStorage.setItem('currentPage', newPage.toString())
+  })
+
+  watch(selectedSort, (newSort) => {
+    localStorage.setItem('selectedSort', newSort)
+  })
+
+  watch(viewType, (newView) => {
+    localStorage.setItem('viewType', newView)
+  })
+
+  onMounted(() => {
+    const savedPage = localStorage.getItem('currentPage')
+    if (savedPage) {
+      const parsedPage = parseInt(savedPage)
+      currentPage.value = Math.max(1, isNaN(parsedPage) ? 1 : parsedPage)
+    }
+  })
 </script>
 
 <template>
   <main class="shop-page">
     <AppHero title="Fashion" :imageURL="APP_HERO_IMAGES.SHOP" />
-    <div class="shop-page__main-block">
+    <div class="shop-page__main-block" ref="mainBlockRef">
       <SortingBar v-model:sortBy="selectedSort" v-model:viewType="viewType" />
-      <ProductList :sortBy="selectedSort" :viewType="viewType" />
+      <ProductList
+        :sortBy="selectedSort"
+        :viewType="viewType"
+        :currentPage="currentPage"
+        :pageSize="pageSize"
+        @update:page="(newPage) => (currentPage = newPage)"
+      />
     </div>
   </main>
 </template>
