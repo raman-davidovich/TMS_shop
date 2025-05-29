@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { storeToRefs } from 'pinia'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
   import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
   import { useProductStore } from '@/stores/productStore'
@@ -7,7 +7,7 @@
 
   const productStore = useProductStore()
 
-  const latestProducts = computed<FirebaseProductType[]>(() => productStore.latestProducts)
+  const { latestProducts } = storeToRefs(productStore)
 </script>
 
 <template>
