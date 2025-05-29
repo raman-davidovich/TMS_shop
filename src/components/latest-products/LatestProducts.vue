@@ -1,12 +1,9 @@
 <script setup lang="ts">
-  import { storeToRefs } from 'pinia'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
   import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
   import { useProductStore } from '@/stores/productStore'
 
   const productStore = useProductStore()
-
-  const { latestProducts } = storeToRefs(productStore)
 </script>
 
 <template>
@@ -15,7 +12,7 @@
   </p>
   <ul v-else class="latest-products__list">
     <AppProductCard
-      v-for="product in latestProducts"
+      v-for="product in productStore.latestProducts"
       :key="product.id"
       v-bind="product"
       :cardType="CARD_TYPES.LATEST"
