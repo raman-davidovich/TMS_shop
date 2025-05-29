@@ -11,19 +11,16 @@
 </script>
 
 <template>
-  <ul class="latest-products">
-    <template v-if="!productStore.isLoading">
-      <AppProductCard
-        v-for="product in latestProducts"
-        :key="product.id"
-        v-bind="product"
-        :cardType="CARD_TYPES.LATEST"
-      />
-    </template>
-
-    <div v-else>Loading latest products...</div>
-
-    <div v-if="productStore.error">{{ productStore.error }}</div>
+  <p v-if="productStore.error || productStore.isLoading" class="latest-products__message">
+    {{ productStore.error || 'Loading latest products...' }}
+  </p>
+  <ul v-else class="latest-products__list">
+    <AppProductCard
+      v-for="product in latestProducts"
+      :key="product.id"
+      v-bind="product"
+      :cardType="CARD_TYPES.LATEST"
+    />
   </ul>
 </template>
 
@@ -31,15 +28,21 @@
   @use '@styles/spacing.scss' as spacing;
 
   .latest-products {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 50px 40px;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
+    &__message {
+      align-self: center;
+    }
 
-    @include spacing.phone {
-      row-gap: 40px;
+    &__list {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 50px 40px;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      @include spacing.phone {
+        row-gap: 40px;
+      }
     }
   }
 </style>
