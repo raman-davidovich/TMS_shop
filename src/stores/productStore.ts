@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase/config'
-import { FirebaseProductType } from '../components/shared/app-product-card/AppProductCard.types'
+import { ProductType } from '../components/shared/app-product-card/AppProductCard.types'
 
 export const useProductStore = defineStore('product', {
   state: () => ({
-    products: [] as FirebaseProductType[],
+    products: [] as ProductType[],
     isLoading: false,
     error: null as string | null
   }),
@@ -29,11 +29,11 @@ export const useProductStore = defineStore('product', {
           id: doc.id,
           ...doc.data(),
           image: `${doc.data().image}?v=${doc.data().updatedAt || Date.now()}`
-        })) as FirebaseProductType[]
+        })) as ProductType[]
 
         await Promise.all(
           this.products.map(
-            (product: FirebaseProductType) =>
+            (product: ProductType) =>
               new Promise((resolve) => {
                 const img = new Image()
                 img.src = product.image

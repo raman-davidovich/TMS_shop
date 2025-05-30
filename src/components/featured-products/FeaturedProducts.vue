@@ -5,7 +5,7 @@
   import { FEATURED_PRODUCTS_TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
   import FeaturedProductsTabs from './components/featured-products-tabs/FeaturedProductsTabs.vue'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
-  import { useProductStore } from '@/stores/productStore'
+  import { useProductStore } from '@/stores'
 
   const productStore = useProductStore()
   const activeTab = ref<FEATURED_PRODUCTS_TABS>(FEATURED_PRODUCTS_TABS.FEATURED)
@@ -19,7 +19,7 @@
     <p v-if="productStore.error || productStore.isLoading" class="featured-products__message">
       {{ productStore.error || 'Loading featured products...' }}
     </p>
-    <TransitionGroup name="list" tag="ul" class="featured-products__product-list">
+    <TransitionGroup v-else name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"
         :key="product.id"

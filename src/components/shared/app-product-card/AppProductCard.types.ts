@@ -20,7 +20,7 @@ export enum CARD_TYPES {
 
 export type ProductPrice = { value: number; currency?: string }
 
-export type FirebaseProductType = {
+export type ProductType = {
   id: string
   image: string
   name: string

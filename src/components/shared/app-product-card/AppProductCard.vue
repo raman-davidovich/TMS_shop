@@ -1,36 +1,44 @@
 <script setup lang="ts">
-  import {
-    FirebaseProductType,
-    CARD_TYPES
-  } from '../../shared/app-product-card/AppProductCard.types'
+  import { ProductType, CARD_TYPES } from '../../shared/app-product-card/AppProductCard.types'
   import SizeItem from './components/size-item/SizeItem.vue'
   import ColorPaletteItem from './components/color-palette-item/ColorPaletteItem.vue'
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
+  import { useFavoriteStore } from '@/stores'
 
-  const { image, name, baseColor, price, availableColors, availableSizes, cardType } = defineProps<
-    FirebaseProductType & { cardType?: CARD_TYPES }
-  >()
+  const { id, image, name, baseColor, price, availableColors, availableSizes, cardType } =
+    defineProps<ProductType & { cardType?: CARD_TYPES }>()
 
-  const { isLiked, shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
+  const { shouldAnimate, toggleLike, formattedPrice } = useProductCard(price)
+
+  const favoriteStore = useFavoriteStore()
+
+  const handleLikeClick = () => {
+    favoriteStore.toggleFavorite(id)
+    toggleLike()
+  }
 </script>
 
 <template>
   <li class="app-product-card" :class="[`app-product-card_${cardType}`]">
     <img :src="image" :alt="name" class="app-product-card__image" />
-    <button class="app-product-card__like-button" @click="toggleLike" aria-label="Add to favorites">
+    <button
+      class="app-product-card__like-button"
+      @click="handleLikeClick"
+      aria-label="Add to favorites"
+    >
       <LikeIcon
         class="app-product-card__like-icon"
         :class="{
-          'app-product-card__like-icon_active': isLiked,
+          'app-product-card__like-icon_active': favoriteStore.isFavorite(id),
           'app-product-card__like-icon_animate': shouldAnimate
         }"
       />
     </button>
-    <h3 class="app-product-card__title">
+    <h3 class="app-product-card__title" :title="name">
       {{ name }}
       <br />
-      <span class="app-product-card__title_color_tertiary">{{ baseColor }}</span>
+      <span class="app-product-card__title_color_tertiary">({{ baseColor }})</span>
     </h3>
     <h4 class="app-product-card__price">
       {{ formattedPrice }}
@@ -71,6 +79,7 @@
     &_featured {
       border-radius: 0 0 10px 10px;
       gap: 14px;
+      width: 242px;
 
       #{$self}__image {
         border-radius: 10px;
@@ -93,6 +102,7 @@
 
     &_latest {
       gap: 10px;
+      width: 240px;
 
       #{$self}__image {
         height: 180px;
@@ -118,6 +128,8 @@
       }
 
       @include spacing.phone {
+        width: 320px;
+
         #{$self}__sizes-list {
           display: none;
         }
@@ -197,7 +209,7 @@
       text-overflow: ellipsis;
       transition: color 0.3s ease;
       white-space: nowrap;
-      width: calc(100% - 16px); // take into account horizontal margin
+      width: calc(100% - 16px); // take into account horizontal margins
 
       &_color_tertiary {
         color: colors.$tertiaryFontColor;

@@ -2,11 +2,13 @@
   import AppHeader from './components/app-header/AppHeader.vue'
   import AppFooter from './components/app-footer/AppFooter.vue'
   import { RouterView } from 'vue-router'
-  import { useProductStore } from '@/stores/productStore'
+  import { useProductStore, useFavoriteStore } from '@/stores'
 
   const productStore = useProductStore()
+  const favoriteStore = useFavoriteStore()
 
   ;(async () => {
+    favoriteStore.initFromStorage()
     await productStore.fetchProducts()
   })()
 </script>
