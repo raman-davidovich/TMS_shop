@@ -10,15 +10,15 @@
   const productStore = useProductStore()
   const activeTab = ref<FEATURED_PRODUCTS_TABS>(FEATURED_PRODUCTS_TABS.FEATURED)
 
-  const filteredProducts = useFilterProducts(activeTab, () => productStore.featuredProducts)
+  const filteredProducts = useFilterProducts(activeTab)
 </script>
 
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
-    <div v-if="productStore.isLoading" class="featured-products__message">
-      Loading featured products...
-    </div>
+    <p v-if="productStore.error || productStore.isLoading" class="featured-products__message">
+      {{ productStore.error || 'Loading featured products...' }}
+    </p>
     <TransitionGroup v-else name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"
@@ -27,7 +27,6 @@
         :cardType="CARD_TYPES.FEATURED"
       />
     </TransitionGroup>
-    <div v-if="productStore.error">{{ productStore.error }}</div>
   </div>
 </template>
 

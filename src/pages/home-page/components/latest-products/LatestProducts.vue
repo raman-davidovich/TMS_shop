@@ -1,29 +1,22 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
   import { CARD_TYPES } from '../../../../components/shared/app-product-card/AppProductCard.types'
   import AppProductCard from '../../../../components/shared/app-product-card/AppProductCard.vue'
   import { useProductStore } from '@/stores/productStore'
-  import { ProductType } from '../../../../components/shared/app-product-card/AppProductCard.types'
 
   const productStore = useProductStore()
-
-  const latestProducts = computed<ProductType[]>(() => productStore.latestProducts)
 </script>
 
 <template>
-  <ul class="latest-products">
-    <template v-if="!productStore.isLoading">
-      <AppProductCard
-        v-for="product in latestProducts"
-        :key="product.id"
-        v-bind="product"
-        :cardType="CARD_TYPES.LATEST"
-      />
-    </template>
-
-    <div v-else>Loading latest products...</div>
-
-    <div v-if="productStore.error">{{ productStore.error }}</div>
+  <p v-if="productStore.error || productStore.isLoading" class="latest-products__message">
+    {{ productStore.error || 'Loading latest products...' }}
+  </p>
+  <ul v-else class="latest-products__list">
+    <AppProductCard
+      v-for="product in productStore.latestProducts"
+      :key="product.id"
+      v-bind="product"
+      :cardType="CARD_TYPES.LATEST"
+    />
   </ul>
 </template>
 
@@ -31,15 +24,21 @@
   @use '@styles/spacing.scss' as spacing;
 
   .latest-products {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 50px 40px;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
+    &__message {
+      align-self: center;
+    }
 
-    @include spacing.phone {
-      row-gap: 40px;
+    &__list {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 50px 40px;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      @include spacing.phone {
+        row-gap: 40px;
+      }
     }
   }
 </style>
