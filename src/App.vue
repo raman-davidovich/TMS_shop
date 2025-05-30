@@ -8,9 +8,8 @@
   const productStore = useProductStore()
   const favoriteStore = useFavoriteStore()
 
-  favoriteStore.initFromStorage()
-
   ;(async () => {
+    favoriteStore.initFromStorage()
     await productStore.fetchProducts()
   })()
 </script>

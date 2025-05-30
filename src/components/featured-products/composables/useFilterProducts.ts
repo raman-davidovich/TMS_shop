@@ -1,12 +1,12 @@
 import { computed, type Ref } from 'vue'
-import type { FirebaseProductType } from '../../shared/app-product-card/AppProductCard.types'
+import type { ProductType } from '../../shared/app-product-card/AppProductCard.types'
 import { FEATURED_PRODUCTS_TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
 import { useProductStore } from '../../../stores/productStore'
 
 export const useFilterProducts = (activeTab: Ref<FEATURED_PRODUCTS_TABS>) => {
   const productStore = useProductStore()
   return computed(() => {
-    const products: FirebaseProductType[] = [...productStore.featuredProducts]
+    const products: ProductType[] = [...productStore.featuredProducts]
 
     switch (activeTab.value) {
       case FEATURED_PRODUCTS_TABS.FEATURED:
