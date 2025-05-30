@@ -1,13 +1,18 @@
 <script setup lang="ts">
-  import { LATEST_PRODUCTS } from '../shared/app-product-card/AppProductCard.constants'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
   import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
+  import { useProductStore } from '@/stores/productStore'
+
+  const productStore = useProductStore()
 </script>
 
 <template>
-  <ul class="latest-products">
+  <p v-if="productStore.error || productStore.isLoading" class="latest-products__message">
+    {{ productStore.error || 'Loading latest products...' }}
+  </p>
+  <ul v-else class="latest-products__list">
     <AppProductCard
-      v-for="product in LATEST_PRODUCTS"
+      v-for="product in productStore.latestProducts"
       :key="product.id"
       v-bind="product"
       :cardType="CARD_TYPES.LATEST"
@@ -19,15 +24,21 @@
   @use '@styles/spacing.scss' as spacing;
 
   .latest-products {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 50px 40px;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
+    &__message {
+      align-self: center;
+    }
 
-    @include spacing.phone {
-      row-gap: 40px;
+    &__list {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 50px 40px;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      @include spacing.phone {
+        row-gap: 40px;
+      }
     }
   }
 </style>

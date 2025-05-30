@@ -5,7 +5,9 @@
   import { FEATURED_PRODUCTS_TABS } from './components/featured-products-tabs/FeaturedProductsTabs.constants'
   import FeaturedProductsTabs from './components/featured-products-tabs/FeaturedProductsTabs.vue'
   import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
+  import { useProductStore } from '@/stores/productStore'
 
+  const productStore = useProductStore()
   const activeTab = ref<FEATURED_PRODUCTS_TABS>(FEATURED_PRODUCTS_TABS.FEATURED)
 
   const filteredProducts = useFilterProducts(activeTab)
@@ -14,6 +16,9 @@
 <template>
   <div class="featured-products">
     <FeaturedProductsTabs v-model="activeTab" />
+    <p v-if="productStore.error || productStore.isLoading" class="featured-products__message">
+      {{ productStore.error || 'Loading featured products...' }}
+    </p>
     <TransitionGroup name="list" tag="ul" class="featured-products__product-list">
       <AppProductCard
         v-for="product in filteredProducts"
@@ -35,6 +40,10 @@
 
     @include spacing.phone {
       gap: 30px;
+    }
+
+    &__message {
+      align-self: center;
     }
 
     &__product-list {
