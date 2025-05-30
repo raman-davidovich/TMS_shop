@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import AppProductCard from '../components/shared/app-product-card/AppProductCard.vue'
-  import { useFavoriteStore } from '@/stores/favoriteStore/favoriteStore'
+  import { useFavoriteStore } from '@/stores'
   import { CARD_TYPES } from '@/components/shared/app-product-card/AppProductCard.types'
   import SectionWrapper from '@/components/shared/section-wrapper/SectionWrapper.vue'
   import PageLink from '@/components/shared/page-link/PageLink.vue'

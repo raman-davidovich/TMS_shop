@@ -4,7 +4,7 @@
   import ColorPaletteItem from './components/color-palette-item/ColorPaletteItem.vue'
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
-  import { useFavoriteStore } from '@/stores/favoriteStore/favoriteStore'
+  import { useFavoriteStore } from '@/stores'
 
   const { id, image, name, baseColor, price, availableColors, availableSizes, cardType } =
     defineProps<ProductType & { cardType?: CARD_TYPES }>()
