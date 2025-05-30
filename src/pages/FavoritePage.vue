@@ -11,7 +11,11 @@
 
 <template>
   <SectionWrapper title="Favorite Products" class="favorite-page" isMarginNarrow>
-    <TransitionGroup name="list" tag="ul" class="favorite-page__list">
+    <div v-if="!favoriteStore.favoriteProducts.length" class="favorite-page__notification">
+      <h4>No favorite products yet</h4>
+      <PageLink buttonTitle="Shop Now" :route="ROUTE_NAMES.SHOP" />
+    </div>
+    <TransitionGroup v-else name="list" tag="ul" class="favorite-page__list">
       <AppProductCard
         v-for="product in favoriteStore.favoriteProducts"
         :key="product.id"
@@ -19,10 +23,6 @@
         :cardType="CARD_TYPES.FEATURED"
       />
     </TransitionGroup>
-    <div v-if="!favoriteStore.favoriteProducts.length" class="favorite-page__notification">
-      <h4>No favorite products yet</h4>
-      <PageLink buttonTitle="Shop Now" :route="ROUTE_NAMES.SHOP" />
-    </div>
   </SectionWrapper>
 </template>
 
