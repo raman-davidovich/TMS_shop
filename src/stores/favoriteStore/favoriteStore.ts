@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { MAX_FAVORITES } from './favoriteStore.constants'
-import { useProductStore } from '../productStore'
+import { useProductStore } from '../index'
 
 export const useFavoriteStore = defineStore('favorites', {
   state: () => ({

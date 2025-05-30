@@ -1,7 +1,7 @@
 import { computed, type Ref } from 'vue'
 import type { ProductType } from '../../../../../components/shared/app-product-card/AppProductCard.types'
 import { FEATURED_PRODUCTS_TABS } from '../components/featured-products-tabs/FeaturedProductsTabs.constants'
-import { useProductStore } from '../../../../../stores/productStore'
+import { useProductStore } from '../../../../../stores'
 
 export const useFilterProducts = (activeTab: Ref<FEATURED_PRODUCTS_TABS>) => {
   const productStore = useProductStore()

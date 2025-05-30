@@ -2,7 +2,7 @@
   import { ProductType, CARD_TYPES } from './AppProductCard.types'
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
-  import { useFavoriteStore } from '@/stores/favoriteStore/favoriteStore'
+  import { useFavoriteStore } from '@/stores'
   import ProductInfo from './components/product-info/ProductInfo.vue'
 
   const { id, image, name, baseColor, price, availableColors, availableSizes, cardType } =
