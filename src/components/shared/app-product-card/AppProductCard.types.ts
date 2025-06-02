@@ -13,6 +13,23 @@ export enum PRODUCT_SIZES {
   XS = 'XS'
 }
 
+export enum PRODUCT_CATEGORIES {
+  BAGS = 'Bags',
+  CLOTHES = 'Clothes',
+  HATS = 'Hats',
+  SHOES = 'Shoes',
+  DRESSES = 'Dresses'
+}
+
+export enum PRODUCT_BRANDS {
+  ADIDAS = 'Adidas',
+  ARMANI = 'Armani',
+  CALVIN_KLEIN = 'Calvin Klein',
+  COLUMBIA = 'Columbia',
+  CONVERSE = 'Converse',
+  DOCKERS = 'Dockers'
+}
+
 export enum CARD_TYPES {
   FEATURED = 'featured',
   LATEST = 'latest',
@@ -32,9 +49,11 @@ export type ProductType = {
   isFeatured: boolean
   createdAt: { seconds: number; nanoseconds: number }
   numberOfSales: number
+  category: PRODUCT_CATEGORIES
+  brand: PRODUCT_BRANDS
 }
 
 export type ProductInfoType = Omit<
   ProductType,
-  'id' | 'image' | 'price' | 'isFeatured' | 'createdAt' | 'numberOfSales'
+  'id' | 'image' | 'price' | 'isFeatured' | 'createdAt' | 'numberOfSales' | 'category' | 'brand'
 >

@@ -4,7 +4,13 @@
   import { CARD_TYPES } from '@/components/shared/app-product-card/AppProductCard.types'
   import type { SortOption } from '@/stores/productStore.types'
   import { computed, watch, onBeforeUpdate, inject, type Ref, nextTick } from 'vue'
-  import type { ProductType } from '@/components/shared/app-product-card/AppProductCard.types'
+  import type {
+    ProductType,
+    PRODUCT_COLORS,
+    PRODUCT_SIZES,
+    PRODUCT_BRANDS,
+    PRODUCT_CATEGORIES
+  } from '@/components/shared/app-product-card/AppProductCard.types'
   import type { ViewType } from './ProductList.types'
   import ListPagination from '../list-pagination/ListPagination.vue'
 
@@ -13,6 +19,15 @@
     viewType: ViewType
     currentPage: number
     pageSize: number
+    filters: {
+      category?: string[]
+      colors?: PRODUCT_COLORS[]
+      sizes?: PRODUCT_SIZES[]
+      brands?: PRODUCT_BRANDS[]
+      searchQuery?: string
+      maxPrice?: number
+      minPrice?: number
+    }
   }>()
 
   const emit = defineEmits<{
@@ -21,10 +36,72 @@
 
   const productStore = useProductStore()
 
-  const sortedProducts = computed<ProductType[]>(() => {
-    return productStore.getSortedProducts(props.sortBy)
+  const baseProducts = computed<ProductType[]>(() => productStore.products)
+
+  const filteredProducts = computed<ProductType[]>(() => {
+    return baseProducts.value.filter((product) => {
+      if (
+        props.filters.searchQuery &&
+        !product.name.toLowerCase().includes(props.filters.searchQuery.toLowerCase())
+      ) {
+        return false
+      }
+
+      if (
+        props.filters.category &&
+        props.filters.category.length > 0 &&
+        !props.filters.category.includes(product.category as PRODUCT_CATEGORIES)
+      ) {
+        return false
+      }
+
+      if (
+        props.filters.colors &&
+        props.filters.colors.length > 0 &&
+        !props.filters.colors.some((color) =>
+          product.availableColors.includes(color as PRODUCT_COLORS)
+        )
+      ) {
+        return false
+      }
+
+      if (
+        props.filters.sizes &&
+        props.filters.sizes.length > 0 &&
+        !props.filters.sizes.some((size) => product.availableSizes.includes(size as PRODUCT_SIZES))
+      ) {
+        return false
+      }
+
+      if (
+        props.filters.brands &&
+        props.filters.brands.length > 0 &&
+        !props.filters.brands.includes(product.brand as PRODUCT_BRANDS)
+      ) {
+        return false
+      }
+
+      if (
+        props.filters.minPrice !== undefined &&
+        Math.trunc(product.price.value / 100) < props.filters.minPrice
+      ) {
+        return false
+      }
+
+      if (
+        props.filters.maxPrice !== undefined &&
+        Math.trunc(product.price.value / 100) > props.filters.maxPrice
+      ) {
+        return false
+      }
+
+      return true
+    })
   })
 
+  const sortedProducts = computed<ProductType[]>(() => {
+    return productStore.getSortedProducts(props.sortBy, filteredProducts.value)
+  })
   const totalPages = computed<number>(() => Math.ceil(sortedProducts.value.length / props.pageSize))
 
   const paginatedProducts = computed<ProductType[]>(() => {
