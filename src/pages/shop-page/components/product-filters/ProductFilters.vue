@@ -6,6 +6,7 @@
     PRODUCT_SIZES,
     PRODUCT_BRANDS
   } from '@/components/shared/app-product-card/AppProductCard.types'
+  import SearchIcon from './components/SearchBarIcon.vue'
 
   const props = defineProps<{
     modelValue: {
@@ -94,6 +95,14 @@
     return counts
   })
 
+  const hasSearchText = computed(() => {
+    return localFilters.value.searchQuery.length > 0
+  })
+
+  const clearSearchBar = () => {
+    localFilters.value.searchQuery = ''
+  }
+
   watchEffect(() => {
     emit('update:modelValue', { ...localFilters.value })
   })
@@ -122,12 +131,18 @@
   <div class="product-filters">
     <div class="filter-group">
       <h4>Search Products</h4>
-      <input
-        type="text"
-        placeholder="Enter product name..."
-        v-model="localFilters.searchQuery"
-        class="search-input"
-      />
+      <div class="search-input-wrapper">
+        <SearchIcon v-if="!hasSearchText" class="search-icon" />
+        <button v-else class="clear-button" @click="clearSearchBar" aria-label="Clear search bar">
+          +
+        </button>
+        <input
+          type="text"
+          placeholder="Enter product name..."
+          v-model="localFilters.searchQuery"
+          class="search-input"
+        />
+      </div>
     </div>
 
     <div class="filter-group">
@@ -235,6 +250,8 @@
 </template>
 
 <style scoped lang="scss">
+  @use '@/styles/colors.scss' as colors;
+
   .product-filters {
     background-color: #fff;
     border-radius: 8px;
@@ -252,6 +269,46 @@
         color: #555;
         font-weight: 600;
         margin-bottom: 8px;
+      }
+
+      .search-input-wrapper {
+        position: relative;
+
+        &:focus-within {
+          /* stylelint-disable-next-line max-nesting-depth */
+          .search-icon,
+          .clear-button {
+            color: #007bff;
+          }
+        }
+      }
+
+      .search-icon,
+      .clear-button {
+        color: #777;
+        height: 21px;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+      }
+
+      .clear-button {
+        align-items: center;
+        background-color: colors.$accentElementColor;
+        border: none;
+        border-radius: 50%;
+        color: colors.$primaryFontColor !important;
+        cursor: pointer;
+        display: flex;
+        height: 25px;
+        justify-content: center;
+        padding: 0;
+        pointer-events: all;
+        rotate: 45deg;
+        width: 25px;
       }
 
       .search-input {
