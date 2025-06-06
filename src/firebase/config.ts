@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, Firestore } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
+import { getAuth, signInAnonymously } from 'firebase/auth'
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyCND3aIQcS8gDvd1-L7bDW5b5UvAIJB20k',
   authDomain: 'tms-shop-25642.firebaseapp.com',
   projectId: 'tms-shop-25642',
@@ -12,6 +13,12 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
-const db: Firestore = getFirestore(app)
+const db = getFirestore(app)
+const auth = getAuth(app)
 
-export { app, db }
+export const initializeFirebase = async () => {
+  await signInAnonymously(auth)
+  return { app, db, auth }
+}
+
+export const getFirestoreDB = () => db

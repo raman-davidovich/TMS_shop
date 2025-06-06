@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../firebase/config'
+import { getFirestoreDB } from '../firebase/config'
 import {
   ProductType,
   PRODUCT_CATEGORIES
@@ -27,12 +27,13 @@ export const useProductStore = defineStore('product', {
 
   actions: {
     async fetchProducts() {
+      this.isLoading = true
       this.error = null
 
       if (this.products.length > 0) return
 
       try {
-        this.isLoading = true
+        const db = getFirestoreDB()
         const querySnapshot = await getDocs(collection(db, 'products'))
         this.products = querySnapshot.docs.map((doc) => ({
           id: doc.id,
