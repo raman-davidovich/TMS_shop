@@ -1,10 +1,9 @@
 <script setup lang="ts">
-  import { ProductType, CARD_TYPES } from '../../shared/app-product-card/AppProductCard.types'
-  import SizeItem from './components/size-item/SizeItem.vue'
-  import ColorPaletteItem from './components/color-palette-item/ColorPaletteItem.vue'
+  import { ProductType, CARD_TYPES } from './AppProductCard.types'
   import LikeIcon from './components/LikeIcon.vue'
   import { useProductCard } from './composables/useProductCard'
   import { useFavoriteStore } from '@/stores'
+  import ProductInfo from './components/product-info/ProductInfo.vue'
 
   const { id, image, name, baseColor, price, availableColors, availableSizes, cardType } =
     defineProps<ProductType & { cardType?: CARD_TYPES }>()
@@ -35,30 +34,14 @@
         }"
       />
     </button>
-    <h3 class="app-product-card__title" :title="name">
-      {{ name }}
-      <br />
-      <span class="app-product-card__title_color_tertiary">({{ baseColor }})</span>
-    </h3>
-    <h4 class="app-product-card__price">
-      {{ formattedPrice }}
-    </h4>
-    <ul v-if="cardType === CARD_TYPES.FEATURED" class="app-product-card__color-palette">
-      <ColorPaletteItem
-        v-for="color in availableColors"
-        :key="color"
-        :backgroundColor="color"
-        class="app-product-card__color-item"
-      />
-    </ul>
-    <ul class="app-product-card__sizes-list">
-      <SizeItem
-        v-for="size in availableSizes"
-        :key="size"
-        :size-title="size"
-        class="app-product-card__size-item"
-      />
-    </ul>
+    <ProductInfo
+      :name="name"
+      :baseColor="baseColor"
+      :availableColors="availableColors"
+      :availableSizes="availableSizes"
+      :cardType="cardType"
+      :price="formattedPrice"
+    />
   </li>
 </template>
 
@@ -68,6 +51,9 @@
 
   .app-product-card {
     $self: &;
+
+    --title-color: #{colors.$secondaryFontColor};
+    --price-color: #{colors.$secondaryFontColor};
 
     cursor: pointer;
     display: flex;
@@ -86,25 +72,22 @@
         height: 414px;
         width: 242px;
       }
-
-      #{$self}__title {
-        font-size: 1.25em;
-        font-weight: 400;
-        letter-spacing: 0.2px;
-        line-height: 1.5em;
-      }
-
-      #{$self}__price {
-        font-size: 1.5em;
-        line-height: 1.6em;
-      }
     }
 
     &_latest {
       gap: 10px;
       width: 240px;
 
+      @include spacing.phone {
+        width: 320px;
+
+        #{$self}__sizes-list {
+          display: none;
+        }
+      }
+
       #{$self}__image {
+        background-size: contain;
         height: 180px;
         object-fit: cover;
         object-position: center;
@@ -114,25 +97,23 @@
           width: 320px;
         }
       }
+    }
 
-      #{$self}__title {
-        font-size: 1em;
-        font-weight: 700;
-        letter-spacing: 0.1px;
-        line-height: 1.5em;
-      }
+    &_long {
+      background-color: colors.$primaryFontColor;
+      border: 1px solid colors.$tertiaryBorderColor;
+      box-shadow: 0 2px 4px 0 #0000001a;
+      flex-direction: row;
+      gap: 37px;
+      padding: 20px 0 25px 22.5px;
+      width: 100%;
 
-      #{$self}__price {
-        font-size: 1em;
-        line-height: 1.75em;
-      }
-
-      @include spacing.phone {
-        width: 320px;
-
-        #{$self}__sizes-list {
-          display: none;
-        }
+      #{$self}__image {
+        background-size: contain;
+        height: 192px;
+        object-fit: cover;
+        object-position: center;
+        width: 294px;
       }
     }
 
@@ -140,13 +121,8 @@
       box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
       transform: translateY(-5px);
 
-      #{$self}__title {
-        color: colors.$accentElementColor;
-      }
-
-      #{$self}__price {
-        color: colors.$accentElementColor;
-      }
+      --title-color: #{colors.$accentElementColor};
+      --price-color: #{colors.$accentElementColor};
 
       #{$self}__image {
         transform: scale(1.03);
@@ -154,7 +130,6 @@
     }
 
     &__image {
-      background-size: contain;
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform;
     }
@@ -199,61 +174,6 @@
 
       &_animate {
         animation: heart-beat 0.4s ease;
-      }
-    }
-
-    &__title {
-      color: colors.$secondaryFontColor;
-      margin: 0 8px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: color 0.3s ease;
-      white-space: nowrap;
-      width: calc(100% - 16px); // take into account horizontal margins
-
-      &_color_tertiary {
-        color: colors.$tertiaryFontColor;
-      }
-    }
-
-    &__price {
-      color: colors.$secondaryFontColor;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      margin: 0 0 0 8px;
-      transition: all 0.3s ease;
-    }
-
-    &__color-palette {
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-start;
-      max-width: 100%;
-      padding: 0 8px;
-    }
-
-    &__color-item {
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: translateX(3px);
-      }
-    }
-
-    &__sizes-list {
-      display: flex;
-      gap: 11px;
-      margin: 0 0 8px 8px;
-      padding: 0;
-    }
-
-    &__size-item {
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: translateX(3px);
       }
     }
   }

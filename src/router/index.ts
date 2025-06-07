@@ -5,13 +5,13 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: ROUTE_NAMES.HOME,
-    component: () => import('../pages/HomePage.vue'),
+    component: () => import('../pages/home-page/HomePage.vue'),
     meta: { title: 'Home' }
   },
   {
     path: '/shop',
     name: ROUTE_NAMES.SHOP,
-    component: () => import('../pages/ShopPage.vue'),
+    component: () => import('../pages/shop-page/ShopPage.vue'),
     meta: { title: 'Shop' }
   },
   {

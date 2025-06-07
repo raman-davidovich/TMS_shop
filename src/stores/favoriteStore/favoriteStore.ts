@@ -18,8 +18,6 @@ export const useFavoriteStore = defineStore('favorites', {
 
   actions: {
     initFromStorage() {
-      this.error = null
-
       try {
         const stored = localStorage.getItem('favorites')
         this.favoriteIds = stored ? JSON.parse(stored) : []
@@ -30,8 +28,6 @@ export const useFavoriteStore = defineStore('favorites', {
     },
 
     toggleFavorite(productId: string) {
-      this.error = null
-
       try {
         if (this.favoriteIds.length >= MAX_FAVORITES && !this.isFavorite(productId)) {
           alert(`Maximum ${MAX_FAVORITES} favorites allowed`)

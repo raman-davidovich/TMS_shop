@@ -3,11 +3,13 @@
   import AppFooter from './components/app-footer/AppFooter.vue'
   import { RouterView } from 'vue-router'
   import { useProductStore, useFavoriteStore } from '@/stores'
+  import { initializeFirebase } from './firebase/config'
 
   const productStore = useProductStore()
   const favoriteStore = useFavoriteStore()
 
   ;(async () => {
+    await initializeFirebase()
     favoriteStore.initFromStorage()
     await productStore.fetchProducts()
   })()

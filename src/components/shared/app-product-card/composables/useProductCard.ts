@@ -8,7 +8,6 @@ interface ProductCardComposable {
 }
 
 export const useProductCard = (price: ProductPrice): ProductCardComposable => {
-  const isLiked = ref<boolean>(false)
   const shouldAnimate = ref<boolean>(false)
 
   const toggleLike = (): void => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { CARD_TYPES } from '../shared/app-product-card/AppProductCard.types'
-  import AppProductCard from '../shared/app-product-card/AppProductCard.vue'
+  import { CARD_TYPES } from '../../../../components/shared/app-product-card/AppProductCard.types'
+  import AppProductCard from '../../../../components/shared/app-product-card/AppProductCard.vue'
   import { useProductStore } from '@/stores'
 
   const productStore = useProductStore()
